@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 public class DisplayUsers extends AppCompatActivity {
     String customer_name,cname,cstsub,cesub,ctotamt,cpayoptn,cmopay,cmacid;
     TextView custname,custstartsub,custendsub,custtotalamt,custpayoptn,custmodeofpay,custmacid,custpkgtype;
-    private FirebaseDatabase myref   ;
+    private FirebaseDatabase myref;
     private DatabaseReference getdata;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
