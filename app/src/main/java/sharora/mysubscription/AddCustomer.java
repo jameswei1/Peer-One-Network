@@ -44,6 +44,7 @@ public class AddCustomer extends AppCompatActivity {
     String storePaidoptn;
     String typeofpay;
     String name_key;
+    String Fire_name_key;
     FirebaseDatabase mFirebaseDatabase;
     DatabaseReference reff;
     Member member;
@@ -100,7 +101,7 @@ public class AddCustomer extends AppCompatActivity {
                 mac_id= macid.getText().toString();
                 packagetype = packageT.getText().toString();
                 name_key = cname+clastname;
-
+                Fire_name_key = name_key.toLowerCase();
                 String id = reff.push().getKey();
                 member = new Member(cname,clastname, startofsub, endofsub, totalamt, packagetype, mac_id, typeofpay, storePaidoptn,name_key);
                /* member = new ViewMember();
@@ -114,7 +115,7 @@ public class AddCustomer extends AppCompatActivity {
                 member.setPaymentmethod(typeofpay);*/
 
 
-                reff.child(name_key).setValue(member);
+                reff.child(Fire_name_key).setValue(member);
                 Toast.makeText(AddCustomer.this, "Customer info successfully saved !", Toast.LENGTH_SHORT).show();
 
          /*  reff.addValueEventListener(new ValueEventListener() {
