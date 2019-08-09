@@ -8,7 +8,7 @@
     tools:context=".Enter_Firstname_Lastname">
 
     <EditText
-        android:id="@+id/macidenter"
+        android:id="@+id/lastname"
         android:layout_width="362dp"
         android:layout_height="65dp"
         android:layout_marginStart="8dp"
@@ -36,15 +36,15 @@
         app:srcCompat="@android:drawable/ic_menu_send" />
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/firstname"
+        android:layout_width="362dp"
+        android:layout_height="65dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="228dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
+        android:hint="Enter customer's first name"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

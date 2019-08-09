@@ -10,17 +10,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Enter_Firstname_Lastname extends AppCompatActivity {
 
-    EditText macidentered;
+    EditText firstname,lastname;
     ImageButton snd;
 
-    String custmacid;
+    String First_name,Last_name,Fire_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter__firstname__lastname);
-        macidentered = (EditText)findViewById(R.id.macidenter);
+        firstname = (EditText)findViewById(R.id.firstname);
         snd = (ImageButton)findViewById(R.id.send);
-
+        lastname = (EditText)findViewById(R.id.lastname);
         snd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,9 +31,11 @@ public class Enter_Firstname_Lastname extends AppCompatActivity {
 
     public void GoToDisplayCustomer(){
 
-        custmacid = macidentered.getText().toString();
+        First_name = firstname.getText().toString();
+        Last_name = lastname.getText().toString();
+        Fire_name = First_name+Last_name;
         Intent intent = new Intent(this, DisplayUsers.class);
-        intent.putExtra("MAC ID",custmacid);
+        intent.putExtra("NAME ID",Fire_name.toLowerCase());
         startActivity(intent);
     }
 }

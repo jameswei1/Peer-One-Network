@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class DisplayUsers extends AppCompatActivity {
-    String macidcustomer,cname,cstsub,cesub,ctotamt,cpayoptn,cmopay,cmacid;
+    String customer_name,cname,cstsub,cesub,ctotamt,cpayoptn,cmopay,cmacid;
     TextView custname,custstartsub,custendsub,custtotalamt,custpayoptn,custmodeofpay,custmacid,custpkgtype;
     private FirebaseDatabase myref;
     private DatabaseReference getdata;
@@ -23,7 +23,7 @@ public class DisplayUsers extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_users);
-        macidcustomer = getIntent().getStringExtra("MAC ID");
+        customer_name = getIntent().getStringExtra("NAME ID");
         // Toast.makeText(this, "MAC ID:"+macidcustomer, Toast.LENGTH_SHORT).show();
         custname = (TextView)findViewById(R.id.namedet);
         custstartsub = (TextView)findViewById(R.id.startsubdet);
@@ -63,14 +63,14 @@ public class DisplayUsers extends AppCompatActivity {
             viewMember.setPaymentmethod(ds.child(macidcustomer).getValue(ViewMember.class).getPaymentmethod());
             viewMember.setPaymentoption(ds.child(macidcustomer).getValue(ViewMember.class).getPaymentoption());*/
 
-            custname.setText(ds.child(macidcustomer).getValue(Member.class).Getname());
-            custstartsub.setText(ds.child(macidcustomer).getValue(Member.class).GetStartsub());
-            custendsub.setText(ds.child(macidcustomer).getValue(Member.class).GetEndsub());
-            custtotalamt.setText(ds.child(macidcustomer).getValue(Member.class).GetTotalamt());
-            custmacid.setText(ds.child(macidcustomer).getValue(Member.class).GetMACid());
-            custpkgtype.setText(ds.child(macidcustomer).getValue(Member.class).Getpkgtype());
-            custpayoptn.setText(ds.child(macidcustomer).getValue(Member.class).GetPaymentOption());
-            custmodeofpay.setText(ds.child(macidcustomer).getValue(Member.class).GetPaymentMethod());
+            custname.setText(ds.child(customer_name).getValue(Member.class).Getname()+" "+ds.child(customer_name).getValue(Member.class).Getlastname());
+            custstartsub.setText(ds.child(customer_name).getValue(Member.class).GetStartsub());
+            custendsub.setText(ds.child(customer_name).getValue(Member.class).GetEndsub());
+            custtotalamt.setText(ds.child(customer_name).getValue(Member.class).GetTotalamt());
+            custmacid.setText(ds.child(customer_name).getValue(Member.class).GetMACid());
+            custpkgtype.setText(ds.child(customer_name).getValue(Member.class).Getpkgtype());
+            custpayoptn.setText(ds.child(customer_name).getValue(Member.class).GetPaymentOption());
+            custmodeofpay.setText(ds.child(customer_name).getValue(Member.class).GetPaymentMethod());
         }
 
 
