@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="sharora.mysubscription">
+    package="sharora.mysubscription">
+
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
     <application
         android:allowBackup="true"
@@ -9,19 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DisplayUsers">
-        </activity>
-        <activity android:name=".Enter_Firstname_Lastname">
-        </activity>
-        <activity android:name=".AddCustomer">
-        </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".EditCustomer"></activity>
+        <activity android:name=".FIngerprint">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DisplayUsers" />
+        <activity android:name=".Enter_Firstname_Lastname" />
+        <activity android:name=".AddCustomer" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

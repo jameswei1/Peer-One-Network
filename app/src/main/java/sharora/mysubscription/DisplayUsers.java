@@ -3,10 +3,13 @@ package sharora.mysubscription;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,8 +18,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class DisplayUsers extends AppCompatActivity {
-    String customer_name,cname,cstsub,cesub,ctotamt,cpayoptn,cmopay,cmacid;
+    String customer_name,fName,lName;
     TextView custname,custstartsub,custendsub,custtotalamt,custpayoptn,custmodeofpay,custmacid,custpkgtype;
+    Button edit, delete;
+
     private FirebaseDatabase myref   ;
     private DatabaseReference getdata;
     @Override
@@ -24,18 +29,19 @@ public class DisplayUsers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_users);
         customer_name = getIntent().getStringExtra("NAME ID");
-        // Toast.makeText(this, "MAC ID:"+macidcustomer, Toast.LENGTH_SHORT).show();
-        custname = (TextView)findViewById(R.id.namedet);
-        custstartsub = (TextView)findViewById(R.id.startsubdet);
-        custendsub = (TextView)findViewById(R.id.endsubdet);
-        custtotalamt = (TextView)findViewById(R.id.totalamountdet);
-        custpayoptn = (TextView)findViewById(R.id.payoptiondet);
-        custmodeofpay = (TextView)findViewById(R.id.mopaydet);
-        custmacid = (TextView)findViewById(R.id.maciddet);
-        custpkgtype = (TextView)findViewById(R.id.pkgdet);
+        custname = findViewById(R.id.namedet);
+        custstartsub = findViewById(R.id.startsubdet);
+        custendsub = findViewById(R.id.endsubdet);
+        custtotalamt = findViewById(R.id.totalamountdet);
+        custpayoptn = findViewById(R.id.payoptiondet);
+        custmodeofpay = findViewById(R.id.mopaydet);
+        custmacid = findViewById(R.id.maciddet);
+        custpkgtype = findViewById(R.id.pkgdet);
         myref = FirebaseDatabase.getInstance();
         getdata = myref.getReference();
-        //  Log.d("TAG","Ehello");
+        edit = findViewById(R.id.editInfo);
+        delete = findViewById(R.id.deleteButton);
+
 
         getdata.addValueEventListener(new ValueEventListener() {
             @Override
@@ -45,25 +51,28 @@ public class DisplayUsers extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(DisplayUsers.this, "cancelled", Toast.LENGTH_SHORT).show();
+            }
+        });
 
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editValues();
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteValue();
             }
         });
     }
     private void showvalues(DataSnapshot dataSnapshot){
         for(DataSnapshot ds : dataSnapshot.getChildren()) {
-            Member viewMember = new Member();
-            //  Log.d("TAG","Ehello");
-            // Toast.makeText(this,ds.child(macidcustomer).getValue(Member.class).Getname() , Toast.LENGTH_SHORT).show();
-            // viewMember.setName(ds.child(macidcustomer).getValue(ViewMember.class).getName());
-           /* viewMember.setStartsub(ds.child(macidcustomer).getValue(ViewMember.class).getStartsub());
-            viewMember.setEndsub(ds.child(macidcustomer).getValue(ViewMember.class).getEndsub());
-            viewMember.setTotalamt(ds.child(macidcustomer).getValue(ViewMember.class).getTotalamt());
-            viewMember.setMACid(ds.child(macidcustomer).getValue(ViewMember.class).getMACid());
-            viewMember.setPkgtype(ds.child(macidcustomer).getValue(ViewMember.class).getPkgtype());
-            viewMember.setPaymentmethod(ds.child(macidcustomer).getValue(ViewMember.class).getPaymentmethod());
-            viewMember.setPaymentoption(ds.child(macidcustomer).getValue(ViewMember.class).getPaymentoption());*/
 
-            custname.setText(ds.child(customer_name).getValue(Member.class).Getname()+" "+ds.child(customer_name).getValue(Member.class).Getlastname());
+            custname.setText(ds.child(customer_name).getValue(Member.class).Getname() + " " + ds.child(customer_name).getValue(Member.class).Getlastname());
             custstartsub.setText(ds.child(customer_name).getValue(Member.class).GetStartsub());
             custendsub.setText(ds.child(customer_name).getValue(Member.class).GetEndsub());
             custtotalamt.setText(ds.child(customer_name).getValue(Member.class).GetTotalamt());
@@ -71,8 +80,30 @@ public class DisplayUsers extends AppCompatActivity {
             custpkgtype.setText(ds.child(customer_name).getValue(Member.class).Getpkgtype());
             custpayoptn.setText(ds.child(customer_name).getValue(Member.class).GetPaymentOption());
             custmodeofpay.setText(ds.child(customer_name).getValue(Member.class).GetPaymentMethod());
+            fName = ds.child(customer_name).getValue(Member.class).Getname();
+            lName = ds.child(customer_name).getValue(Member.class).Getlastname();
         }
+    }
 
+    private void editValues() {
+        Intent intent = new Intent(this, EditCustomer.class);
 
+        intent.putExtra("firstName", fName);
+        intent.putExtra("lastName", lName);
+        intent.putExtra("startSub", custstartsub.getText().toString());
+        intent.putExtra("endSub", custendsub.getText().toString());
+        intent.putExtra("totalAmount", custtotalamt.getText().toString());
+        intent.putExtra("MACID", custmacid.getText().toString());
+        intent.putExtra("packageType", custpkgtype.getText().toString());
+        intent.putExtra("payOption", custpayoptn.getText().toString());
+        intent.putExtra("paymentMethod", custmodeofpay.getText().toString());
+
+        startActivity(intent);
+    }
+
+    private void deleteValue() {
+        String id = fName + lName;
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("customers").child(id.toLowerCase());
+        databaseReference.removeValue();
     }
 }
