@@ -17,7 +17,7 @@ import android.widget.Toast;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class FIngerprint extends AppCompatActivity {
+public class Fingerprint extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class FIngerprint extends AppCompatActivity {
                     // user clicked negative button
                 } else {
                     //TODO: Called when an unrecoverable error has been encountered and the operation is complete.
+                    
                 }
             }
 
@@ -54,7 +55,7 @@ public class FIngerprint extends AppCompatActivity {
 
         final BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
                 .setTitle("Welcome to My Subcription")
-                .setSubtitle("Get ready to be amazed!")
+                .setSubtitle("Developed by James Wei")
                 .setNegativeButtonText("Cancel")
                 .build();
 
