@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Enter_Firstname_Lastname extends AppCompatActivity {
 
     EditText firstname,lastname;
-    ImageButton snd;
+    ImageButton snd ;
     String id;
 
     private FirebaseDatabase myref ;
