@@ -23,7 +23,7 @@ public class Enter_Firstname_Lastname extends AppCompatActivity {
     ImageButton snd;
     String id;
 
-    private FirebaseDatabase myref   ;
+    private FirebaseDatabase myref;
     private DatabaseReference getdata;
 
     String First_name,Last_name,Fire_name;
