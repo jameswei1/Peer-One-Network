@@ -1,5 +1,6 @@
 package sharora.mysubscription;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -13,6 +14,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AddCustomer extends AppCompatActivity {
     ImageButton send;
@@ -34,6 +38,8 @@ public class AddCustomer extends AppCompatActivity {
     RadioGroup modeofpay;
     RadioButton payoption;
 
+    Date date1, date2;
+
     String cname ;
     String clastname;
     String startofsub;
@@ -54,25 +60,20 @@ public class AddCustomer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_customer);
-        //Toast.makeText(this, "Welcome!", Toast.LENGTH_SHORT).show();
-        send = (ImageButton) findViewById(R.id.send);
-        name = (EditText)findViewById(R.id.ename);
-        startsub = (EditText)findViewById(R.id.estsub);
-        endsub = (EditText)findViewById(R.id.eesub);
-        remmo = (TextView)findViewById(R.id.vrmo);
-        lastname = (EditText)findViewById(R.id.lastname);
-        remda = (TextView)findViewById(R.id.vrda);
-        etotalamt = (EditText)findViewById(R.id.etotamt);
-        packageT = (EditText)findViewById(R.id.evpack);
-        macid = (EditText)findViewById(R.id.emacid);
+        send = findViewById(R.id.send);
+        name = findViewById(R.id.ename);
+        startsub = findViewById(R.id.estsub);
+        endsub = findViewById(R.id.eesub);
+        remmo = findViewById(R.id.vrmo);
+        lastname = findViewById(R.id.lastname);
+        remda = findViewById(R.id.vrda);
+        etotalamt = findViewById(R.id.etotamt);
+        packageT = findViewById(R.id.evpack);
+        macid = findViewById(R.id.emacid);
 
-        paid = (RadioGroup)findViewById(R.id.gpaid);
+        paid = findViewById(R.id.gpaid);
+        modeofpay = findViewById(R.id.gmopay);
 
-
-        modeofpay = (RadioGroup)findViewById(R.id.gmopay);
-
-        //TransferValues();
-        // member = new Member();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         reff = mFirebaseDatabase.getReference("customers");
 
@@ -81,21 +82,22 @@ public class AddCustomer extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             /*   member.Setname(cname);
-                member.SetStarsub(startofsub);
-                member.SetEndsub(endofsub);
-                member.Setpkgtype(packagetype);
-                member.SetMACid(mac_id);
-                member.SetToalamt(totalamt);*/
                 int paidid = paid.getCheckedRadioButtonId();
-                paidchoice = (RadioButton) findViewById(paidid);
+                paidchoice = findViewById(paidid);
                 storePaidoptn = paidchoice.getText().toString();
                 int mopayid = modeofpay.getCheckedRadioButtonId();
-                payoption = (RadioButton) findViewById(mopayid);
+                payoption = findViewById(mopayid);
                 typeofpay = payoption.getText().toString();
                 cname = name.getText().toString();
-                startofsub = startsub.getText().toString();
-                endofsub = endsub.getText().toString();
+
+                try {
+                    date1= new SimpleDateFormat("dd/MM/yyyy").parse(startsub.getText().toString());
+                    date2= new SimpleDateFormat("dd/MM/yyyy").parse(endsub.getText().toString());
+                }
+                catch (Exception e) {
+                    Toast.makeText(AddCustomer.this, "Improper date format", Toast.LENGTH_SHORT).show();
+                }
+
                 clastname = lastname.getText().toString();
                 totalamt = etotalamt.getText().toString();
                 mac_id= macid.getText().toString();
@@ -103,81 +105,17 @@ public class AddCustomer extends AppCompatActivity {
                 name_key = cname+clastname;
                 Fire_name_key = name_key.toLowerCase();
                 String id = reff.push().getKey();
-                member = new Member(cname,clastname, startofsub, endofsub, totalamt, packagetype, mac_id, typeofpay, storePaidoptn,name_key);
-               /* member = new ViewMember();
-                member.setName(cname);
-                member.setEndsub(endofsub);
-                member.setStartsub(startofsub);
-                member.setTotalamt(totalamt);
-                member.setPkgtype(packagetype);
-                member.setMACid(mac_id);
-                member.setPaymentoption(storePaidoptn);
-                member.setPaymentmethod(typeofpay);*/
-
+                member = new Member(cname,clastname, date1.toString(), date2.toString(), totalamt, packagetype, mac_id, typeofpay, storePaidoptn,name_key);
 
                 reff.child(Fire_name_key).setValue(member);
                 Toast.makeText(AddCustomer.this, "Customer info successfully saved !", Toast.LENGTH_SHORT).show();
-
-         /*  reff.addValueEventListener(new ValueEventListener() {
-               @Override
-               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-               }
-
-               @Override
-               public void onCancelled(@NonNull DatabaseError databaseError) {
-
-               }
-           })*/
-
-
+                goToMain();
             }
         });
-
-
-
-        // Toast.makeText(this, storePaidoptn, Toast.LENGTH_SHORT).show();
-
-
     }
-   /* public void TransferValues(){
 
-            send.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int paidid = paid.getCheckedRadioButtonId();
-                    paidchoice = (RadioButton) findViewById(paidid);
-                    storePaidoptn = paidchoice.getText().toString();
-                    int mopayid = modeofpay.getCheckedRadioButtonId();
-                    payoption = (RadioButton) findViewById(mopayid);
-                    typeofpay = payoption.getText().toString();
-                    cname = name.getText().toString();
-                    startofsub = startsub.getText().toString();
-                    endofsub = endsub.getText().toString();
-                    totalamt = etotalamt.getText().toString();
-                    mac_id= macid.getText().toString();
-                    packagetype = packageT.getText().toString();
-
-                    member.Setname(cname);
-                    member.SetStarsub(startofsub);
-                    member.SetEndsub(endofsub);
-                    member.Setpkgtype(packagetype);
-                    member.SetMACid(mac_id);
-                    member.SetToalamt(totalamt);
-
-                    reff.push().setValue(member);
-                     // Toast.makeText(AddCustomer.this,storePaidoptn, Toast.LENGTH_SHORT).show();
-
-                    //Toast.makeText(AddCustomer.this,"Payment Option: "+ storePaidoptn+" Type of Payment: "+typeofpay, Toast.LENGTH_SHORT).show();
-
-
-
-                }
-            });
-
-
-  //      Toast.makeText(this, paidchoice.getText().toString(), Toast.LENGTH_SHORT).show();
-
-
-    }*/
+    private void goToMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }

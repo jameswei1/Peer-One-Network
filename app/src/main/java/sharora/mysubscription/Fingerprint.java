@@ -47,8 +47,8 @@ public class Fingerprint extends AppCompatActivity {
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 //TODO: Called when a biometric is recognized.
-                LocalDate myObj = LocalDate.now();
-                Log.d("date", myObj.toString());
+//                LocalDate myObj = LocalDate.now();
+//                Log.d("date", myObj.toString());
                 gotomain();
             }
 
