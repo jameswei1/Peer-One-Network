@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -29,11 +28,7 @@ public class EditCustomer extends AppCompatActivity {
     Button update;
 
     RadioGroup modeofpay;
-    RadioButton payoption;
-
-    RadioGroup paid ;
-    RadioButton paidchoice ;
-    RadioButton fully;
+    RadioGroup paid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,31 +37,31 @@ public class EditCustomer extends AppCompatActivity {
 
         update = findViewById(R.id.updateButton);
 
-        final String  startSub = getIntent().getStringExtra("startSub");
-        startSubField =  findViewById(R.id.startSubField);
+        final String startSub = getIntent().getStringExtra("startSub");
+        startSubField = findViewById(R.id.startSubField);
         startSubField.setText(startSub);
 
-        final String  endSub = getIntent().getStringExtra("endSub");
+        final String endSub = getIntent().getStringExtra("endSub");
         endSubField = findViewById(R.id.endSubField);
         endSubField.setText(endSub);
 
-        final String  totalAmount = getIntent().getStringExtra("totalAmount");
+        final String totalAmount = getIntent().getStringExtra("totalAmount");
         totalAmountField = findViewById(R.id.totalAmountField);
         totalAmountField.setText(totalAmount);
 
-        final String  fName = getIntent().getStringExtra("firstName");
+        final String fName = getIntent().getStringExtra("firstName");
         firstNameField = findViewById(R.id.firstNameField);
         firstNameField.setText(fName);
 
-        final String  lName = getIntent().getStringExtra("lastName");
+        final String lName = getIntent().getStringExtra("lastName");
         lastNameField = findViewById(R.id.lastNameField);
         lastNameField.setText(lName);
 
-        final String  pkgType = getIntent().getStringExtra("packageType");
+        final String pkgType = getIntent().getStringExtra("packageType");
         packageTypeField = findViewById(R.id.packageTypeField);
         packageTypeField.setText(pkgType);
 
-        final String  MACID = getIntent().getStringExtra("MACID");
+        final String MACID = getIntent().getStringExtra("MACID");
         MACIDField = findViewById(R.id.MACIDField);
         MACIDField.setText(MACID);
 
@@ -83,13 +78,7 @@ public class EditCustomer extends AppCompatActivity {
                 final String pkgType = packageTypeField.getText().toString();
                 final String MACID = MACIDField.getText().toString();
 
-//                RadioGroup payoption = findViewById(R.id.gmopay);
-//                int typeOfPay = payoption.getCheckedRadioButtonId();
-//
-//                RadioGroup paidOrNa = findViewById(R.id.gpaid);
-//                int howMuchPaid = paidOrNa.getCheckedRadioButtonId();
-
-                updateValue(fName, lName, startSub, endSub, totalAmount, pkgType, MACID, 3, 2);
+                updateValue(fName, lName, startSub, endSub, totalAmount, pkgType, MACID);
             }
         });
     }
@@ -100,12 +89,25 @@ public class EditCustomer extends AppCompatActivity {
         databaseReference.removeValue();
     }
 
-    private void updateValue(String fName, String lName, String startSub, String endSub, String totalamt, String pkgtype, String macid, int paymentmethod, int howMuchPaid) {
+    private void updateValue(String fName, String lName, String startSub, String endSub, String totalamt, String pkgtype, String macid) {
+        RadioButton paymentPlan;
+        RadioButton paymentMethod;
+
         String id = fName + lName;
+        String HowMuchPaid;
+        String PaymentMethod;
+
+        paid = findViewById(R.id.gpaid);
+        paymentPlan = findViewById(paid.getCheckedRadioButtonId());
+        HowMuchPaid = paymentPlan.getText().toString();
+
+        modeofpay = findViewById(R.id.gmopay);
+        paymentMethod = findViewById(modeofpay.getCheckedRadioButtonId());
+        PaymentMethod = paymentMethod.getText().toString();
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("customers").child(id.toLowerCase());
-        Member member = new Member(fName, lName, startSub, endSub, totalamt, pkgtype, macid, "visa", "Totally Paid", id);
+
+        Member member = new Member(fName, lName, startSub, endSub, totalamt, pkgtype, macid, PaymentMethod, HowMuchPaid, id);
         databaseReference.setValue(member);
-//        Toast.makeText(this, String.valueOf(paymentmethod), Toast.LENGTH_SHORT).show();
-//        Toast.makeText(this, String.valueOf(howMuchPaid), Toast.LENGTH_SHORT).show();
     }
 }

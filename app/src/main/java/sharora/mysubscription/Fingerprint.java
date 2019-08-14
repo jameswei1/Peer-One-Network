@@ -11,11 +11,16 @@ import androidx.biometric.BiometricPrompt;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.time.LocalDate;
+import java.time.Period;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Fingerprint extends AppCompatActivity {
 
@@ -42,8 +47,9 @@ public class Fingerprint extends AppCompatActivity {
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 //TODO: Called when a biometric is recognized.
+                LocalDate myObj = LocalDate.now();
+                Log.d("date", myObj.toString());
                 gotomain();
-
             }
 
             @Override
