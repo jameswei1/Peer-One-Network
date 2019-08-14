@@ -42,8 +42,6 @@ public class AddCustomer extends AppCompatActivity {
 
     String cname ;
     String clastname;
-    String startofsub;
-    String endofsub;
     String totalamt ;
     String mac_id;
     String packagetype ;
@@ -77,39 +75,54 @@ public class AddCustomer extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         reff = mFirebaseDatabase.getReference("customers");
 
-        Toast.makeText(this, "Firebase connection Success !! Your good to go !!", Toast.LENGTH_SHORT).show();
-
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int paidid = paid.getCheckedRadioButtonId();
-                paidchoice = findViewById(paidid);
-                storePaidoptn = paidchoice.getText().toString();
-                int mopayid = modeofpay.getCheckedRadioButtonId();
-                payoption = findViewById(mopayid);
-                typeofpay = payoption.getText().toString();
-                cname = name.getText().toString();
-
                 try {
                     date1= new SimpleDateFormat("dd/MM/yyyy").parse(startsub.getText().toString());
                     date2= new SimpleDateFormat("dd/MM/yyyy").parse(endsub.getText().toString());
                 }
-                catch (Exception e) {
+                catch (Exception e) {}
+
+                if (name.getText().toString().matches("") || lastname.getText().toString().matches("") ||
+                    startsub.getText().toString().matches("") || endsub.getText().toString().matches("") ||
+                    etotalamt.getText().toString().matches("") || packageT.getText().toString().matches("") ||
+                    macid.getText().toString().matches("")){
+                    Toast.makeText(AddCustomer.this, "Field missing", Toast.LENGTH_SHORT).show();
+                }
+
+                else if (date1 == null || date2 == null) {
                     Toast.makeText(AddCustomer.this, "Improper date format", Toast.LENGTH_SHORT).show();
                 }
 
-                clastname = lastname.getText().toString();
-                totalamt = etotalamt.getText().toString();
-                mac_id= macid.getText().toString();
-                packagetype = packageT.getText().toString();
-                name_key = cname+clastname;
-                Fire_name_key = name_key.toLowerCase();
-                String id = reff.push().getKey();
-                member = new Member(cname,clastname, date1.toString(), date2.toString(), totalamt, packagetype, mac_id, typeofpay, storePaidoptn,name_key);
+                else {
+                    int paidid = paid.getCheckedRadioButtonId();
+                    paidchoice = findViewById(paidid);
+                    storePaidoptn = paidchoice.getText().toString();
+                    int mopayid = modeofpay.getCheckedRadioButtonId();
+                    payoption = findViewById(mopayid);
+                    typeofpay = payoption.getText().toString();
+                    cname = name.getText().toString();
 
-                reff.child(Fire_name_key).setValue(member);
-                Toast.makeText(AddCustomer.this, "Customer info successfully saved !", Toast.LENGTH_SHORT).show();
-                goToMain();
+                    clastname = lastname.getText().toString();
+                    totalamt = etotalamt.getText().toString();
+                    mac_id= macid.getText().toString();
+                    packagetype = packageT.getText().toString();
+                    name_key = cname+clastname;
+                    Fire_name_key = name_key.toLowerCase();
+                    String id = reff.push().getKey();
+
+                    try {
+                        member = new Member(cname,clastname, date1.toString(), date2.toString(), totalamt, packagetype, mac_id, typeofpay, storePaidoptn,name_key);
+                    }
+                    catch (Exception e) {
+                        Toast.makeText(AddCustomer.this, "Improper date format", Toast.LENGTH_SHORT).show();
+                    }
+
+                    reff.child(Fire_name_key).setValue(member);
+                    Toast.makeText(AddCustomer.this, "Customer info successfully saved !", Toast.LENGTH_SHORT).show();
+                    goToMain();
+                }
             }
         });
     }
