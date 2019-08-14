@@ -1,10 +1,4 @@
 package sharora.mysubscription;
-
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.icu.text.DateFormat;
-import android.icu.text.SimpleDateFormat;
-import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.provider.Telephony;
@@ -28,6 +22,9 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Date;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class AddCustomer extends AppCompatActivity {
     ImageButton send;
     EditText name ;
@@ -47,6 +44,8 @@ public class AddCustomer extends AppCompatActivity {
 
     RadioGroup modeofpay;
     RadioButton payoption;
+
+    Date date1, date2;
 
     String cname ;
     String clastname;
@@ -73,25 +72,20 @@ public class AddCustomer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_customer);
-        //Toast.makeText(this, "Welcome!", Toast.LENGTH_SHORT).show();
-        send = (ImageButton) findViewById(R.id.send);
-        name = (EditText)findViewById(R.id.ename);
-        startsub = (EditText)findViewById(R.id.estsub);
-        endsub = (EditText)findViewById(R.id.eesub);
-        remmo = (TextView)findViewById(R.id.vrmo);
-        lastname = (EditText)findViewById(R.id.lastname);
-        remda = (TextView)findViewById(R.id.vrda);
-        etotalamt = (EditText)findViewById(R.id.etotamt);
-        packageT = (EditText)findViewById(R.id.evpack);
-        macid = (EditText)findViewById(R.id.emacid);
+        send = findViewById(R.id.send);
+        name = findViewById(R.id.ename);
+        startsub = findViewById(R.id.estsub);
+        endsub = findViewById(R.id.eesub);
+        remmo = findViewById(R.id.vrmo);
+        lastname = findViewById(R.id.lastname);
+        remda = findViewById(R.id.vrda);
+        etotalamt = findViewById(R.id.etotamt);
+        packageT = findViewById(R.id.evpack);
+        macid = findViewById(R.id.emacid);
 
-        paid = (RadioGroup)findViewById(R.id.gpaid);
+        paid = findViewById(R.id.gpaid);
+        modeofpay = findViewById(R.id.gmopay);
 
-
-        modeofpay = (RadioGroup)findViewById(R.id.gmopay);
-
-        //TransferValues();
-        // member = new Member();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         reff = mFirebaseDatabase.getReference("customers");
 
@@ -127,26 +121,13 @@ public class AddCustomer extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             /*   member.Setname(cname);
-                member.SetStarsub(startofsub);
-                member.SetEndsub(endofsub);
-                member.Setpkgtype(packagetype);
-                member.SetMACid(mac_id);
-                member.SetToalamt(totalamt);*/
                 int paidid = paid.getCheckedRadioButtonId();
-                paidchoice = (RadioButton) findViewById(paidid);
+                paidchoice = findViewById(paidid);
                 storePaidoptn = paidchoice.getText().toString();
                 int mopayid = modeofpay.getCheckedRadioButtonId();
-                payoption = (RadioButton) findViewById(mopayid);
+                payoption = findViewById(mopayid);
                 typeofpay = payoption.getText().toString();
                 cname = name.getText().toString();
-
-
-                startofsub = startsub.getText().toString();
-                endofsub = endsub.getText().toString();
-
-                Days = Integer.parseInt(startofsub.substring(0,startofsub.length()-8))-Integer.parseInt(endofsub.substring(0,endofsub.length()-8));
-               // Months =Integer.parseInt(startofsub.substring(3,startofsub.length()).substring())
 
                 clastname = lastname.getText().toString();
                 totalamt = etotalamt.getText().toString();
@@ -155,55 +136,13 @@ public class AddCustomer extends AppCompatActivity {
                 name_key = cname+clastname;
                 Fire_name_key = name_key.toLowerCase();
                 String id = reff.push().getKey();
-                member = new Member(cname,clastname, startofsub, endofsub, totalamt, packagetype, mac_id, typeofpay, storePaidoptn,name_key);
-               /* member = new ViewMember();
-                member.setName(cname);
-                member.setEndsub(endofsub);
-                member.setStartsub(startofsub);
-                member.setTotalamt(totalamt);
-                member.setPkgtype(packagetype);
-                member.setMACid(mac_id);
-                member.setPaymentoption(storePaidoptn);
-                member.setPaymentmethod(typeofpay);*/
-
+                member = new Member(cname,clastname, date1.toString(), date2.toString(), totalamt, packagetype, mac_id, typeofpay, storePaidoptn,name_key);
 
                 reff.child(Fire_name_key).setValue(member);
                 Toast.makeText(AddCustomer.this, "Customer info successfully saved !", Toast.LENGTH_SHORT).show();
-
-         /*  reff.addValueEventListener(new ValueEventListener() {
-               @Override
-               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-               }
-
-               @Override
-               public void onCancelled(@NonNull DatabaseError databaseError) {
-
-               }
-           })*/
-
-
+                goToMain();
             }
         });
-
-
-
-        // Toast.makeText(this, storePaidoptn, Toast.LENGTH_SHORT).show();
-
-
-    }
-    public void onSend(View v){
-        String phnum = "3657774972";
-        String msg = "Yo this app works!!!";
-
-        if(checkPermission((Manifest.permission.SEND_SMS))){
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phnum,null,msg,null,null);
-            Toast.makeText(this, "Message Sent!", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(this, "Permission Denied!", Toast.LENGTH_SHORT).show();
-        }
     }
     public boolean checkPermission(String permission){
         int check = ContextCompat.checkSelfPermission(this,permission);
@@ -237,16 +176,11 @@ public class AddCustomer extends AppCompatActivity {
                     reff.push().setValue(member);
                      // Toast.makeText(AddCustomer.this,storePaidoptn, Toast.LENGTH_SHORT).show();
 
-                    //Toast.makeText(AddCustomer.this,"Payment Option: "+ storePaidoptn+" Type of Payment: "+typeofpay, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(AddCustomer.this,"Payment Option: "+ storePaidoptn+" Type of Payment: "+typeofpay, Toast.LENGTH_SHORT).show();*/
 
 
-
-                }
-            });
-
-
-  //      Toast.makeText(this, paidchoice.getText().toString(), Toast.LENGTH_SHORT).show();
-
-
-    }*/
+    private void goToMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }

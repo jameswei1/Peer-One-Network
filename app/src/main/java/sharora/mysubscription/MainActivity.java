@@ -3,6 +3,7 @@ package sharora.mysubscription;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +14,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageButton AddCust = (ImageButton)findViewById(R.id.addcust);
-        ImageButton ViewCust = (ImageButton)findViewById(R.id.viewcust);
+        ImageButton AddCust = findViewById(R.id.addcust);
+        ImageButton ViewCust = findViewById(R.id.viewcust);
+        Button logout = findViewById(R.id.logoutButton);
 
         AddCust.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToFingerPrint();
+            }
+        });
+
     }
 
     //Sends to next Activity
@@ -40,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void GotoMACID(){
         Intent intent = new Intent(this,Enter_Firstname_Lastname.class);
+        startActivity(intent);
+    }
+
+    public void goToFingerPrint() {
+        Intent intent = new Intent(this, Fingerprint.class);
         startActivity(intent);
     }
 }
