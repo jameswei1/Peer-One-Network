@@ -1,6 +1,14 @@
 package sharora.mysubscription;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.provider.Telephony;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -13,6 +21,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Date;
 
 public class AddCustomer extends AppCompatActivity {
     ImageButton send;
@@ -37,7 +51,8 @@ public class AddCustomer extends AppCompatActivity {
     String cname ;
     String clastname;
     String startofsub;
-    String endofsub;
+    int Days,Months;
+    String endofsub, DaysLeft,MonthsLeft;
     String totalamt ;
     String mac_id;
     String packagetype ;
@@ -45,9 +60,13 @@ public class AddCustomer extends AppCompatActivity {
     String typeofpay;
     String name_key;
     String Fire_name_key;
+    String phnum = "6478305885";
+    String msg = "Yo this app works!!!";
+
     FirebaseDatabase mFirebaseDatabase;
     DatabaseReference reff;
     Member member;
+    final int RequestCode = 1;
 
     private static final String TAG = "MyActivity";
     @Override
@@ -76,8 +95,35 @@ public class AddCustomer extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         reff = mFirebaseDatabase.getReference("customers");
 
-        Toast.makeText(this, "Firebase connection Success !! Your good to go !!", Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this, "Firebase connection Success !! Your good to go !!", Toast.LENGTH_SHORT).show();
+      if(checkPermission(Manifest.permission.SEND_SMS)){
+          Calendar c = Calendar.getInstance();
+          int timeOfDay = c.get(Calendar.MINUTE);
+          Date time = c.getTime();
+          DateFormat dateFormat = new SimpleDateFormat("hh:mm");
+          String strDate = dateFormat.format(time);
+          // if(timeOfDay == 01){
+      //    if(strDate.equals("10:44")){
+          try {
+              SmsManager smsManager = SmsManager.getDefault();
+              smsManager.sendTextMessage(phnum, null, msg, null, null);
+              Toast.makeText(getApplicationContext(), "SMS Sent!",
+                      Toast.LENGTH_LONG).show();
+          } catch (Exception e) {
+              Toast.makeText(getApplicationContext(),
+                      "SMS faild, please try again later!",
+                      Toast.LENGTH_LONG).show();
+              e.printStackTrace();
+          }
 
+         // }
+      }
+      else{
+          ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, RequestCode);
+      }
+
+
+       // }
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,8 +140,14 @@ public class AddCustomer extends AppCompatActivity {
                 payoption = (RadioButton) findViewById(mopayid);
                 typeofpay = payoption.getText().toString();
                 cname = name.getText().toString();
+
+
                 startofsub = startsub.getText().toString();
                 endofsub = endsub.getText().toString();
+
+                Days = Integer.parseInt(startofsub.substring(0,startofsub.length()-8))-Integer.parseInt(endofsub.substring(0,endofsub.length()-8));
+               // Months =Integer.parseInt(startofsub.substring(3,startofsub.length()).substring())
+
                 clastname = lastname.getText().toString();
                 totalamt = etotalamt.getText().toString();
                 mac_id= macid.getText().toString();
@@ -139,6 +191,23 @@ public class AddCustomer extends AppCompatActivity {
         // Toast.makeText(this, storePaidoptn, Toast.LENGTH_SHORT).show();
 
 
+    }
+    public void onSend(View v){
+        String phnum = "3657774972";
+        String msg = "Yo this app works!!!";
+
+        if(checkPermission((Manifest.permission.SEND_SMS))){
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phnum,null,msg,null,null);
+            Toast.makeText(this, "Message Sent!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(this, "Permission Denied!", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public boolean checkPermission(String permission){
+        int check = ContextCompat.checkSelfPermission(this,permission);
+        return (check== PackageManager.PERMISSION_GRANTED);
     }
    /* public void TransferValues(){
 
