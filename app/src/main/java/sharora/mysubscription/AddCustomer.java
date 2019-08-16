@@ -53,7 +53,6 @@ public class AddCustomer extends AppCompatActivity {
     DatabaseReference reff;
     Member member;
 
-    private static final String TAG = "MyActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,9 +114,7 @@ public class AddCustomer extends AppCompatActivity {
                     try {
                         member = new Member(cname,clastname, date1.toString(), date2.toString(), totalamt, packagetype, mac_id, typeofpay, storePaidoptn,name_key);
                     }
-                    catch (Exception e) {
-                        Toast.makeText(AddCustomer.this, "Improper date format", Toast.LENGTH_SHORT).show();
-                    }
+                    catch (Exception e) {}
 
                     reff.child(Fire_name_key).setValue(member);
                     Toast.makeText(AddCustomer.this, "Customer info successfully saved !", Toast.LENGTH_SHORT).show();
