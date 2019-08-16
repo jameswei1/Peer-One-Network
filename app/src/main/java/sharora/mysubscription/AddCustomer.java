@@ -109,10 +109,9 @@ public class AddCustomer extends AppCompatActivity {
                     packagetype = packageT.getText().toString();
                     name_key = cname+clastname;
                     Fire_name_key = name_key.toLowerCase();
-                    String id = reff.push().getKey();
 
                     try {
-                        member = new Member(cname,clastname, date1.toString(), date2.toString(), totalamt, packagetype, mac_id, typeofpay, storePaidoptn,name_key);
+                        member = new Member(cname,clastname, startsub.getText().toString(), endsub.getText().toString(), totalamt, packagetype, mac_id, typeofpay, storePaidoptn,name_key);
                     }
                     catch (Exception e) {}
 
