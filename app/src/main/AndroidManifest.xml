@@ -23,6 +23,12 @@
         <activity android:name=".Enter_Firstname_Lastname" />
         <activity android:name=".AddCustomer" />
         <activity android:name=".MainActivity"></activity>
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true"/>
+
     </application>
 
 </manifest>
