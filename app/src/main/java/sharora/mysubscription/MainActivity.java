@@ -45,10 +45,9 @@ public class MainActivity extends AppCompatActivity {
         calendar.set(calendar.get(Calendar.YEAR),
                      calendar.get(Calendar.MONTH),
                      calendar.get(Calendar.DAY_OF_MONTH),
-                    12,
-                    16,
-                 30);
-
+                    4,
+                    23,
+                    0);
         setAlarm(calendar.getTimeInMillis());
     }
 

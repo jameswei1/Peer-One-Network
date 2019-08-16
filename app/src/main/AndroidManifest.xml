@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditCustomer"></activity>
+        <activity android:name=".Splashscreen"/>
+        <activity android:name=".ViewAllCustomers" />
+        <activity android:name=".EditCustomer" />
         <activity android:name=".Fingerprint">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,13 +25,12 @@
         <activity android:name=".DisplayUsers" />
         <activity android:name=".Enter_Firstname_Lastname" />
         <activity android:name=".AddCustomer" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
 
         <receiver
             android:name=".AlarmReceiver"
             android:enabled="true"
-            android:exported="true"/>
-
+            android:exported="true" />
     </application>
 
 </manifest>

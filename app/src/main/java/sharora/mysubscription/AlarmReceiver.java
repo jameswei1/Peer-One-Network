@@ -49,14 +49,28 @@ public class AlarmReceiver extends BroadcastReceiver {
                      calendar.get(Calendar.MONTH),
                      calendar.get(Calendar.DAY_OF_MONTH));
         calendar.add(Calendar.DATE, 5);
-        date1 = Calendar.getInstance().getTime();
-        //date1.setM()
+        date1 = calendar.getTime();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy");
         String strDate = dateFormat.format(date1);
 
+        Query query = FirebaseDatabase.getInstance().getReference("customers").orderByChild("Endsub").equalTo(strDate);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists() ){
+                    for(DataSnapshot ds: dataSnapshot.getChildren()){
+                        Toast.makeText(context, ds.getValue(Member.class).Getname(), Toast.LENGTH_SHORT).show();
+                        Log.d("date", "found someone who expires");
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         ref = FirebaseDatabase.getInstance().getReference("customers");
-        Query query = ref.child("customers").orderByChild("Endsub").equalTo(strDate);
 
 
         Log.d("alarm", strDate);
