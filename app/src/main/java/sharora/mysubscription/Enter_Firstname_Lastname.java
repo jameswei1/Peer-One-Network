@@ -14,16 +14,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class Enter_Firstname_Lastname extends AppCompatActivity {
 
     EditText firstname,lastname;
-    ImageButton snd;
+    ImageButton snd ;
     String id;
 
-    private FirebaseDatabase myref   ;
+    private FirebaseDatabase myref ;
     private DatabaseReference getdata;
 
     String First_name,Last_name,Fire_name;
@@ -49,7 +48,7 @@ public class Enter_Firstname_Lastname extends AppCompatActivity {
                             if (dataSnapshot.hasChild(id.toLowerCase())) {
                                 GoToDisplayCustomer();
                             } else {
-                                Toast.makeText(Enter_Firstname_Lastname.this, id+"Customer not found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Enter_Firstname_Lastname.this, id+" Customer not found", Toast.LENGTH_SHORT).show();
                             }
                         }
 
