@@ -35,7 +35,7 @@ public class DisplayUsers extends AppCompatActivity {
           //  customer_name=getIntent().getStringExtra("NAME ID");
         //}
         //else{
-            customer_name = getIntent().getStringExtra("NAME ID");
+
         //}
 
         custname = findViewById(R.id.namedet);
@@ -79,18 +79,20 @@ public class DisplayUsers extends AppCompatActivity {
         });
     }
     private void showvalues(DataSnapshot dataSnapshot){
+        customer_name = getIntent().getStringExtra("NAME ID");
         for(DataSnapshot ds : dataSnapshot.getChildren()) {
-
-            custname.setText(ds.child(customer_name).getValue(Member.class).Getname() + " " + ds.child(customer_name).getValue(Member.class).Getlastname());
-            custstartsub.setText(ds.child(customer_name).getValue(Member.class).GetStartsub());
-            custendsub.setText(ds.child(customer_name).getValue(Member.class).GetEndsub());
-            custtotalamt.setText(ds.child(customer_name).getValue(Member.class).GetTotalamt());
-            custmacid.setText(ds.child(customer_name).getValue(Member.class).GetMACid());
-            custpkgtype.setText(ds.child(customer_name).getValue(Member.class).Getpkgtype());
-            custpayoptn.setText(ds.child(customer_name).getValue(Member.class).GetPaymentOption());
-            custmodeofpay.setText(ds.child(customer_name).getValue(Member.class).GetPaymentMethod());
-            fName = ds.child(customer_name).getValue(Member.class).Getname();
-            lName = ds.child(customer_name).getValue(Member.class).Getlastname();
+            if (ds.hasChild(customer_name)) {
+                custname.setText(ds.child(customer_name).getValue(Member.class).Getname() + " " + ds.child(customer_name).getValue(Member.class).Getlastname());
+                custstartsub.setText(ds.child(customer_name).getValue(Member.class).GetStartsub());
+                custendsub.setText(ds.child(customer_name).getValue(Member.class).GetEndsub());
+                custtotalamt.setText(ds.child(customer_name).getValue(Member.class).GetTotalamt());
+                custmacid.setText(ds.child(customer_name).getValue(Member.class).GetMACid());
+                custpkgtype.setText(ds.child(customer_name).getValue(Member.class).Getpkgtype());
+                custpayoptn.setText(ds.child(customer_name).getValue(Member.class).GetPaymentOption());
+                custmodeofpay.setText(ds.child(customer_name).getValue(Member.class).GetPaymentMethod());
+                fName = ds.child(customer_name).getValue(Member.class).Getname();
+                lName = ds.child(customer_name).getValue(Member.class).Getlastname();
+            }
         }
     }
 
@@ -114,5 +116,7 @@ public class DisplayUsers extends AppCompatActivity {
         String id = fName + lName;
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("customers").child(id.toLowerCase());
         databaseReference.removeValue();
+        Intent intent = new Intent(this, Enter_Firstname_Lastname.class);
+        startActivity(intent);
     }
 }
