@@ -61,7 +61,7 @@ public class Fingerprint extends AppCompatActivity {
 
         final BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
                 .setTitle("Welcome to My Subcription")
-                .setSubtitle("Developed by James Wei")
+                .setSubtitle("Developed by Sharan Rohit Raj")
                 .setNegativeButtonText("Cancel")
                 .build();
 

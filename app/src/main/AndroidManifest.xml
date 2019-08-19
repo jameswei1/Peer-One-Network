@@ -12,8 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Splashscreen"/>
-        <activity android:name=".ViewAllCustomers" />
+        <activity android:name=".View_All_Customers"></activity>
+        <activity android:name=".Splashscreen" />
         <activity android:name=".EditCustomer" />
         <activity android:name=".Fingerprint">
             <intent-filter>

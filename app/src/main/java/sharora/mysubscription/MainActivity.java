@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -19,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ImageButton AddCust = findViewById(R.id.addcust);
-        ImageButton ViewCust = findViewById(R.id.viewcust);
+        ImageButton ViewCust =(ImageButton) findViewById(R.id.viewcust2);
+        ImageButton ViewAllCust =(ImageButton) findViewById(R.id.viewallcust);
         Button logout = findViewById(R.id.logoutButton);
 
         AddCust.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
                 goToFingerPrint();
             }
         });
+        ViewAllCust.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GotoViewAllCustomers();
+            }
+        });
+
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(calendar.get(Calendar.YEAR),
@@ -59,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void GotoMACID(){
         Intent intent = new Intent(this,Enter_Firstname_Lastname.class);
+        startActivity(intent);
+    }
+    public void GotoViewAllCustomers(){
+        Intent intent = new Intent(this,View_All_Customers.class);
         startActivity(intent);
     }
 
