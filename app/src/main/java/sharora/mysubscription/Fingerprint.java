@@ -28,7 +28,7 @@ public class Fingerprint extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fingerprint);
-         Executor executor = Executors.newSingleThreadExecutor();
+        final Executor executor = Executors.newSingleThreadExecutor();
         final FragmentActivity activity = this;
 
         final BiometricPrompt biometricPrompt = new BiometricPrompt(activity, executor, new BiometricPrompt.AuthenticationCallback() {
@@ -49,6 +49,11 @@ public class Fingerprint extends AppCompatActivity {
                 //TODO: Called when a biometric is recognized.
 //                LocalDate myObj = LocalDate.now();
 //                Log.d("date", myObj.toString());
+
+                if (executor == null) {
+                    throw new IllegalArgumentException("Executor must not be null");
+                }
+
                 gotomain();
             }
 
