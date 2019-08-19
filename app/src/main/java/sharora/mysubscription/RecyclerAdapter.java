@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -32,13 +33,24 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.myView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final myViewHolder holder, int position) {
 
         holder.name.setText(customers.get(position).Getname()+" " + customers.get(position).Getlastname());
         holder.start_sub.setText(customers.get(position).GetStartsub());
         holder.end_sub.setText(customers.get(position).GetEndsub());
         holder.paymentoptn.setText(customers.get(position).GetPaymentOption());
         holder.pkgtype.setText(customers.get(position).Getpkgtype());
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+               Intent intent = new Intent(context, DisplayUsers.class);
+               intent.putExtra("NAME ID", holder.name.getText().toString().replaceAll("\\s+", "").toLowerCase());
+               context.startActivity(intent);
+
+            }
+        });
 
     }
 

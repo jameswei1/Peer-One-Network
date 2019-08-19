@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class DisplayUsers extends AppCompatActivity {
-    String customer_name,fName,lName;
+    String customer_name,recycler_customer_name,fName,lName;
     TextView custname,custstartsub,custendsub,custtotalamt,custpayoptn,custmodeofpay,custmacid,custpkgtype;
     Button edit, delete;
 
@@ -28,7 +28,16 @@ public class DisplayUsers extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_users);
-        customer_name = getIntent().getStringExtra("NAME ID");
+
+
+        //recycler_customer_name = getIntent().getStringExtra("names");
+        //if(recycler_customer_name == null){
+          //  customer_name=getIntent().getStringExtra("NAME ID");
+        //}
+        //else{
+            customer_name = getIntent().getStringExtra("NAME ID");
+        //}
+
         custname = findViewById(R.id.namedet);
         custstartsub = findViewById(R.id.startsubdet);
         custendsub = findViewById(R.id.endsubdet);
