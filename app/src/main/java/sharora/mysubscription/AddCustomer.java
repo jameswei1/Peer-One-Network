@@ -115,12 +115,13 @@ public class AddCustomer extends AppCompatActivity {
 
                     try {
                         member = new Member(cname,clastname, startsub.getText().toString(), endsub.getText().toString(), totalamt, packagetype, mac_id, typeofpay, storePaidoptn,name_key, PhoneNumber);
+                        reff.child(Fire_name_key).setValue(member);
+                        Toast.makeText(AddCustomer.this, "Customer info successfully saved !", Toast.LENGTH_SHORT).show();
+                        goToMain();
                     }
                     catch (Exception e) {}
 
-                    reff.child(Fire_name_key).setValue(member);
-                    Toast.makeText(AddCustomer.this, "Customer info successfully saved !", Toast.LENGTH_SHORT).show();
-                    goToMain();
+
                 }
             }
         });

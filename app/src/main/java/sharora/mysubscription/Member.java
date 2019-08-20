@@ -98,6 +98,9 @@ public class Member {
     public String Getname_key(){
         return name_key;
     }
+    public void Setname_key(String Namekey){
+        this.name_key = Namekey;
+    }
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -107,7 +110,4 @@ public class Member {
         this.phoneNumber = phoneNumber;
     }
 
-    public void Setname_key(String Namekey){
-        this.name_key = Namekey;
-    }
 }

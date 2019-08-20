@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">My Subscription</string>
     <string name="authenticate">Authenticate</string>
+    <string name="hiii">Hii</string>
 </resources>
