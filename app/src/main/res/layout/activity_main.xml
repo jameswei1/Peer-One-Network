@@ -5,17 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/background_new"
+    android:layout_marginLeft="-10dp"
+    android:layout_marginRight="-10dp">
 
 
-    <ImageButton
+    <Button
         android:id="@+id/viewcust2"
         android:layout_width="234dp"
-        android:layout_height="85dp"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:layout_weight="1"
+        android:background="@drawable/roundbutton"
+        android:fontFamily="@font/advent_pro_medium"
+        android:text="Search/Edit Customer"
+        android:textColor="#F5F5F5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addcust"
@@ -29,40 +36,49 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_weight="1"
+        android:background="@drawable/roundbutton"
+        android:fontFamily="@font/advent_pro_medium"
         android:text="Logout"
+        android:textColor="#F5F5F5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.971"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <Button
         android:id="@+id/addcust"
         android:layout_width="234dp"
-        android:layout_height="85dp"
-
+        android:layout_height="50dp"
+        android:text="Add Customer"
+        android:fontFamily="@font/advent_pro_medium"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="224dp"
+        android:layout_marginTop="290dp"
         android:layout_marginEnd="8dp"
         android:layout_weight="1"
+        android:background="@drawable/roundbutton"
+        android:textColor="#F5F5F5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/editbox_background" />
 
-    <ImageButton
+    <Button
         android:id="@+id/viewallcust"
         android:layout_width="234dp"
-        android:layout_height="85dp"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="90dp"
         android:layout_marginEnd="8dp"
         android:layout_weight="1"
+
+        android:background="@drawable/roundbutton"
+        android:fontFamily="@font/advent_pro_medium"
+        android:text="View all customers"
+        android:textColor="#F5F5F5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addcust"
-        app:srcCompat="@android:drawable/editbox_background"
-        android:contentDescription="TODO" />
+        app:layout_constraintTop_toBottomOf="@+id/addcust" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

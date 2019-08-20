@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class DisplayUsers extends AppCompatActivity {
     String customer_name,recycler_customer_name,fName,lName;
-    TextView custname,custstartsub,custendsub,custtotalamt,custpayoptn,custmodeofpay,custmacid,custpkgtype;
+    TextView custname,custstartsub,custendsub,custtotalamt,custpayoptn,custmodeofpay,custmacid,custpkgtype,pNum;
     Button edit, delete;
 
     private FirebaseDatabase myref   ;
@@ -32,7 +32,7 @@ public class DisplayUsers extends AppCompatActivity {
 
         //recycler_customer_name = getIntent().getStringExtra("names");
         //if(recycler_customer_name == null){
-          //  customer_name=getIntent().getStringExtra("NAME ID");
+        //  customer_name=getIntent().getStringExtra("NAME ID");
         //}
         //else{
 
@@ -50,6 +50,7 @@ public class DisplayUsers extends AppCompatActivity {
         getdata = myref.getReference();
         edit = findViewById(R.id.editInfo);
         delete = findViewById(R.id.deleteButton);
+        pNum = findViewById(R.id.Mobile);
 
 
         getdata.addValueEventListener(new ValueEventListener() {
@@ -90,6 +91,7 @@ public class DisplayUsers extends AppCompatActivity {
                 custpkgtype.setText(ds.child(customer_name).getValue(Member.class).Getpkgtype());
                 custpayoptn.setText(ds.child(customer_name).getValue(Member.class).GetPaymentOption());
                 custmodeofpay.setText(ds.child(customer_name).getValue(Member.class).GetPaymentMethod());
+                pNum.setText(ds.child(customer_name).getValue(Member.class).getPhoneNumber());
                 fName = ds.child(customer_name).getValue(Member.class).Getname();
                 lName = ds.child(customer_name).getValue(Member.class).Getlastname();
             }
@@ -108,6 +110,7 @@ public class DisplayUsers extends AppCompatActivity {
         intent.putExtra("packageType", custpkgtype.getText().toString());
         intent.putExtra("payOption", custpayoptn.getText().toString());
         intent.putExtra("paymentMethod", custmodeofpay.getText().toString());
+        intent.putExtra("number", pNum.getText().toString());
 
         startActivity(intent);
     }

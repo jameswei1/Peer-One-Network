@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageButton AddCust = findViewById(R.id.addcust);
-        ImageButton ViewCust =(ImageButton) findViewById(R.id.viewcust2);
-        ImageButton ViewAllCust =(ImageButton) findViewById(R.id.viewallcust);
+        Button AddCust = findViewById(R.id.addcust);
+        Button ViewCust = findViewById(R.id.viewcust2);
+        Button ViewAllCust = findViewById(R.id.viewallcust);
         Button logout = findViewById(R.id.logoutButton);
 
         AddCust.setOnClickListener(new View.OnClickListener() {
@@ -56,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(calendar.get(Calendar.YEAR),
-                     calendar.get(Calendar.MONTH),
-                     calendar.get(Calendar.DAY_OF_MONTH),
-                    18,
-                    58,
-                    0);
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH),
+                17,
+                11,
+                0);
         setAlarm(calendar.getTimeInMillis());
     }
 

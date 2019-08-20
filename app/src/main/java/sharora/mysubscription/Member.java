@@ -11,12 +11,13 @@ public class Member {
     String paymentmethod;
     String paymentoption;
     String name_key;
+    String phoneNumber;
 
     public Member(){
 
     }
 
-    public Member(String name, String Lastname, String startsub, String endsub, String totalamt, String pkgtype, String macid,String paymentmethod,String paymentoption, String name_key){
+    public Member(String name, String Lastname, String startsub, String endsub, String totalamt, String pkgtype, String macid,String paymentmethod,String paymentoption, String name_key, String PhoneNumber){
 
         this.firstname = name;
         this.lastname = Lastname;
@@ -28,6 +29,7 @@ public class Member {
         this.paymentmethod = paymentmethod;
         this.paymentoption = paymentoption;
         this.name_key = name_key;
+        this.phoneNumber = PhoneNumber;
     }
 
     public String Getname(){
@@ -38,11 +40,11 @@ public class Member {
         this.firstname = Name;
     }
     public String Getlastname(){
-     return lastname;
+        return lastname;
     }
 
     public void Setlastname(String lastname){
-      this.lastname = lastname;
+        this.lastname = lastname;
     }
     public String GetStartsub(){
         return Startsub;
@@ -94,11 +96,18 @@ public class Member {
     }
 
     public String Getname_key(){
-       return name_key;
+        return name_key;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public void Setname_key(String Namekey){
         this.name_key = Namekey;
-     }
-
+    }
 }

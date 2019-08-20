@@ -5,6 +5,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorCompat;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -12,6 +14,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,53 +33,65 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static java.lang.Thread.sleep;
 import static sharora.mysubscription.AlarmReceiver.CHANNEL1_ID;
 
 public class Splashscreen extends AppCompatActivity {
-    TextView name;
-    Date date1;
+    public static final int STARTUP_DELAY = 300;
+    public static final int ANIM_ITEM_DURATION = 1000;
+    public static final int ITEM_DELAY = 300;
+
+    private boolean animationStarted = false;
     private NotificationManagerCompat notificationManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
-        name = findViewById(R.id.name_val);
+        setTheme(R.style.AppTheme);
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH));
-        calendar.add(Calendar.DATE, 5);
-        date1 = calendar.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy");
-        String strDate = dateFormat.format(date1);
-        notificationManager = NotificationManagerCompat.from(this);
+    }
 
-        Query query = FirebaseDatabase.getInstance().getReference("customers").orderByChild("Endsub").equalTo(strDate);
+    public void onWindowFocusChanged(boolean hasFocus) {
 
-        ValueEventListener valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-                    for(DataSnapshot ds: dataSnapshot.getChildren()) {
-                        Log.d("id", "name");
-                        Toast.makeText(Splashscreen.this, "text", Toast.LENGTH_SHORT).show();
-                        //Getting intent and PendingIntent instance
-                        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                        PendingIntent pi= PendingIntent.getActivity(getApplicationContext(), 0, intent,0);
+        if (!hasFocus || animationStarted) {
+            return;
+        }
 
-                        //Get the SmsManager instance and call the sendTextMessage method to send message
-                        SmsManager sms=SmsManager.getDefault();
-                        sms.sendTextMessage("6478305885", null, "hello javatpoint", pi,null);
-                    }
-                }
+        animate();
+
+        super.onWindowFocusChanged(hasFocus);
+    }
+
+    private void animate() {
+        ImageView logoImageView = (ImageView) findViewById(R.id.splash);
+        ViewGroup container = (ViewGroup) findViewById(R.id.container);
+
+        ViewCompat.animate(logoImageView)
+                .translationY(-250)
+                .setStartDelay(STARTUP_DELAY)
+                .setDuration(ANIM_ITEM_DURATION).setInterpolator(
+                new DecelerateInterpolator(1.2f)).start();
+
+        for (int i = 0; i < container.getChildCount(); i++) {
+            View v = container.getChildAt(i);
+            ViewPropertyAnimatorCompat viewAnimator;
+
+            if (!(v instanceof Button)) {
+                viewAnimator = ViewCompat.animate(v)
+                        .translationY(50).alpha(1)
+                        .setStartDelay((ITEM_DELAY * i) + 500)
+                        .setDuration(1000);
+            } else {
+                viewAnimator = ViewCompat.animate(v)
+                        .scaleY(1).scaleX(1)
+                        .setStartDelay((ITEM_DELAY * i) + 500)
+                        .setDuration(500);
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(Splashscreen.this, "Error occurred", Toast.LENGTH_SHORT).show();
-            }
-        };
-        query.addListenerForSingleValueEvent(valueEventListener);
+            viewAnimator.setInterpolator(new DecelerateInterpolator()).start();
+        }
     }
 }

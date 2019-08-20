@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context=".MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_new"
+    android:layout_marginLeft="-10dp"
+    android:layout_marginRight="-10dp"
+    tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,10 +19,12 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="22dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="36dp"
+            android:fontFamily="@font/advent_pro_medium"
             android:text="First Name"
+            android:textColor="#F5F5F5"
             app:layout_constraintEnd_toStartOf="@+id/ename"
 
             app:layout_constraintHorizontal_bias="0.0"
@@ -28,15 +33,21 @@
 
         <EditText
             android:id="@+id/ename"
-            android:layout_width="153dp"
-            android:layout_height="39dp"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="36dp"
             android:layout_marginEnd="8dp"
+            android:background="@drawable/edittextstyle"
             android:ems="10"
+            android:fontFamily="@font/advent_pro_medium"
             android:inputType="textPersonName"
+            android:textColor="#F5F5F5"
+            android:textColorHighlight="#18C8EC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/first_names" />
 
         <TextView
             android:id="@+id/stsub"
@@ -45,7 +56,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="168dp"
             android:layout_marginEnd="8dp"
+            android:fontFamily="@font/advent_pro_medium"
             android:text="Start"
+            android:textColor="#F5F5F5"
             app:layout_constraintEnd_toStartOf="@+id/estsub"
             app:layout_constraintHorizontal_bias="0.25"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,13 +67,17 @@
         <EditText
             android:id="@+id/estsub"
             android:layout_width="113dp"
-            android:layout_height="47dp"
+            android:layout_height="30dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="76dp"
+            android:layout_marginTop="95dp"
             android:layout_marginEnd="8dp"
+            android:background="@drawable/edittextstyle"
             android:ems="10"
+            android:fontFamily="@font/advent_pro_medium"
             android:hint="dd/mm/yyyy"
             android:inputType="date"
+            android:textColor="#F5F5F5"
+            android:textColorHint="#A9AEAF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.209"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +90,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="168dp"
             android:layout_marginEnd="8dp"
+            android:fontFamily="@font/advent_pro_medium"
             android:text="End"
+            android:textColor="#F5F5F5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.582"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,104 +101,68 @@
         <EditText
             android:id="@+id/eesub"
             android:layout_width="110dp"
-            android:layout_height="49dp"
+            android:layout_height="30dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="152dp"
+            android:layout_marginTop="163dp"
             android:layout_marginEnd="8dp"
+            android:background="@drawable/edittextstyle"
             android:ems="10"
+            android:fontFamily="@font/advent_pro_medium"
             android:hint="dd/mm/yyyy"
             android:inputType="date"
+            android:textColor="#F5F5F5"
+            android:textColorHint="#A9AEAF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.905"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/vrmo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="184dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.262"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ename"/>
-
-        <TextView
-            android:id="@+id/rmo"
-            android:layout_width="wrap_content"
-            android:layout_height="17dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="76dp"
-            android:layout_marginEnd="8dp"
-            android:text="Rem. Month"
-            app:layout_constraintEnd_toStartOf="@+id/vrmo"
-            app:layout_constraintHorizontal_bias="0.296"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stsub"/>
-
-        <TextView
-            android:id="@+id/rda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="76dp"
-            android:layout_marginEnd="95dp"
-            android:text="Rem. Days"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.96"
-            app:layout_constraintStart_toEndOf="@+id/vrmo"
-            app:layout_constraintTop_toBottomOf="@+id/esub" />
-
-        <TextView
-            android:id="@+id/vrda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="180dp"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.147"
-            app:layout_constraintStart_toEndOf="@+id/rda"
-            app:layout_constraintTop_toBottomOf="@+id/ename"/>
-
 
         <EditText
             android:id="@+id/etotamt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="252dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="273dp"
+            android:layout_marginEnd="95dp"
+            android:background="@drawable/edittextstyle"
             android:ems="10"
+            android:fontFamily="@font/advent_pro_medium"
             android:inputType="textPersonName"
+            android:textColor="#F5F5F5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.267"
-            app:layout_constraintStart_toEndOf="@+id/vtotamt"
-            app:layout_constraintTop_toBottomOf="@+id/ename"/>
+            app:layout_constraintHorizontal_bias="0.89"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ename" />
 
         <TextView
             android:id="@+id/vtotamt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/advent_pro_medium"
             android:text="Total Amount"
+            android:textColor="#F5F5F5"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rmo"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
             android:id="@+id/gpaid"
             android:layout_width="409dp"
             android:layout_height="37dp"
+
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="60dp"
+            android:fontFamily="@font/advent_pro_light"
             android:orientation="horizontal"
+            android:textColor="#F5F5F5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.212"
             app:layout_constraintStart_toStartOf="parent"
@@ -189,14 +172,20 @@
                 android:id="@+id/tpaid"
                 android:layout_width="190dp"
                 android:layout_height="wrap_content"
-                android:text="Totally Paid" />
+                android:fontFamily="@font/advent_pro_medium"
+                android:text="Totally Paid"
+                android:buttonTint="@color/cyan"
+                android:textColor="#F5F5F5" />
 
             <RadioButton
                 android:id="@+id/ppaid"
                 android:layout_width="227dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Partially Paid" />
+                android:fontFamily="@font/advent_pro_medium"
+                android:text="Partially Paid"
+                android:buttonTint="@color/cyan"
+                android:textColor="#F5F5F5" />
         </RadioGroup>
 
         <TextView
@@ -206,7 +195,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
+            android:fontFamily="@font/advent_pro_light"
             android:text="Method Of Payment"
+            android:textColor="#F5F5F5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -221,7 +212,10 @@
             android:layout_marginTop="56dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:fontFamily="@font/advent_pro_light"
             android:orientation="vertical"
+
+            android:textColor="#F5F5F5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.035"
             app:layout_constraintStart_toStartOf="parent"
@@ -232,21 +226,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Visa" />
+                android:fontFamily="@font/advent_pro_medium"
+                android:text="Visa"
+                android:buttonTint="@color/cyan"
+                android:textColor="#F5F5F5" />
 
             <RadioButton
                 android:id="@+id/debit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Debit" />
+                android:fontFamily="@font/advent_pro_medium"
+                android:text="Debit"
+                android:buttonTint="@color/cyan"
+                android:textColor="#F5F5F5" />
 
             <RadioButton
                 android:id="@+id/cash"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Cash" />
+                android:fontFamily="@font/advent_pro_medium"
+                android:text="Cash"
+                android:buttonTint="@color/cyan"
+                android:textColor="#F5F5F5" />
         </RadioGroup>
 
         <TextView
@@ -254,63 +257,71 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
             android:layout_marginTop="32dp"
+            android:fontFamily="@font/advent_pro_medium"
             android:text="Package Type"
+            android:textColor="#F5F5F5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gmopay" />
 
         <EditText
             android:id="@+id/evpack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="95dp"
+            android:background="@drawable/edittextstyle"
             android:ems="10"
+            android:fontFamily="@font/advent_pro_light"
             android:inputType="textPersonName"
+            android:textColor="#F5F5F5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.259"
             app:layout_constraintStart_toEndOf="@+id/vpack"
             app:layout_constraintTop_toBottomOf="@+id/gmopay" />
 
-        <ImageButton
+        <Button
             android:id="@+id/send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="94dp"
+            android:layout_height="50dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="664dp"
             android:layout_marginEnd="8dp"
+            android:background="@drawable/roundbutton"
+            android:fontFamily="@font/advent_pro_light"
+            android:text="save"
+            android:textColor="#F5F5F5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.988"
+            app:layout_constraintHorizontal_bias="0.994"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/evpack"
-            app:srcCompat="@android:drawable/ic_menu_send" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/macid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="36dp"
+            android:fontFamily="@font/advent_pro_medium"
             android:text="MAC I.D"
+            android:textColor="#F5F5F5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vpack" />
 
         <EditText
             android:id="@+id/emacid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
             android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="12dp"
+
+            android:layout_marginTop="23dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:background="@drawable/edittextstyle"
             android:ems="10"
+            android:fontFamily="@font/advent_pro_light"
             android:inputType="textPersonName"
+            android:textColor="#F5F5F5"
             app:layout_constraintEnd_toStartOf="@+id/send"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/macid"
@@ -320,10 +331,12 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="8dp"
+            android:fontFamily="@font/advent_pro_medium"
             android:text="Last Name"
+            android:textColor="#F5F5F5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.003"
             app:layout_constraintStart_toStartOf="parent"
@@ -331,16 +344,21 @@
 
         <EditText
             android:id="@+id/lastname"
-            android:layout_width="153dp"
-            android:layout_height="39dp"
-            android:layout_marginStart="8dp"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
+            android:background="@drawable/edittextstyle"
             android:ems="10"
+            android:fontFamily="@font/advent_pro_medium"
             android:inputType="textPersonName"
+            android:textColor="#F5F5F5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.483"
+            app:layout_constraintHorizontal_bias="0.486"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ename" />
+            app:layout_constraintTop_toBottomOf="@+id/ename"
+            tools:text="@tools:sample/first_names" />
 
         <TextView
             android:id="@+id/textView2"
@@ -349,11 +367,54 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="128dp"
             android:layout_marginEnd="8dp"
+            android:fontFamily="@font/advent_pro_semibold"
             android:text="Subscription"
+            android:textColor="#F5F5F5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.467"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/phoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/advent_pro_medium"
+            android:text="Mobile Number"
+            android:textColor="#F5F5F5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.023"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.39" />
+
+        <EditText
+            android:id="@+id/number"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="75dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/edittextstyle"
+            android:ems="10"
+            android:fontFamily="@font/advent_pro_medium"
+            android:hint="No dashes or spaces"
+            android:inputType="textPersonName"
+            android:textColor="#F5F5F5"
+            android:textColorHint="#A9AEAF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.851"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.366"
+            tools:text="@tools:sample/us_phones" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

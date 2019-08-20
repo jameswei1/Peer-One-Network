@@ -3,6 +3,7 @@ package sharora.mysubscription;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -19,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AddCustomer extends AppCompatActivity {
-    ImageButton send;
+    Button send;
     EditText name ;
     EditText startsub;
     EditText endsub;
@@ -29,6 +30,7 @@ public class AddCustomer extends AppCompatActivity {
     EditText etotalamt ;
     EditText packageT ;
     EditText macid ;
+    EditText phoneNumber;
 
 
     RadioGroup paid ;
@@ -49,6 +51,7 @@ public class AddCustomer extends AppCompatActivity {
     String typeofpay;
     String name_key;
     String Fire_name_key;
+    String PhoneNumber;
     FirebaseDatabase mFirebaseDatabase;
     DatabaseReference reff;
     Member member;
@@ -61,12 +64,11 @@ public class AddCustomer extends AppCompatActivity {
         name = findViewById(R.id.ename);
         startsub = findViewById(R.id.estsub);
         endsub = findViewById(R.id.eesub);
-        remmo = findViewById(R.id.vrmo);
         lastname = findViewById(R.id.lastname);
-        remda = findViewById(R.id.vrda);
         etotalamt = findViewById(R.id.etotamt);
         packageT = findViewById(R.id.evpack);
         macid = findViewById(R.id.emacid);
+        phoneNumber = findViewById(R.id.number);
 
         paid = findViewById(R.id.gpaid);
         modeofpay = findViewById(R.id.gmopay);
@@ -84,9 +86,9 @@ public class AddCustomer extends AppCompatActivity {
                 catch (Exception e) {}
 
                 if (name.getText().toString().matches("") || lastname.getText().toString().matches("") ||
-                    startsub.getText().toString().matches("") || endsub.getText().toString().matches("") ||
-                    etotalamt.getText().toString().matches("") || packageT.getText().toString().matches("") ||
-                    macid.getText().toString().matches("")){
+                        startsub.getText().toString().matches("") || endsub.getText().toString().matches("") ||
+                        etotalamt.getText().toString().matches("") || packageT.getText().toString().matches("") ||
+                        macid.getText().toString().matches("") || phoneNumber.getText().toString().matches("")) {
                     Toast.makeText(AddCustomer.this, "Field missing", Toast.LENGTH_SHORT).show();
                 }
 
@@ -102,6 +104,7 @@ public class AddCustomer extends AppCompatActivity {
                     payoption = findViewById(mopayid);
                     typeofpay = payoption.getText().toString();
                     cname = name.getText().toString();
+                    PhoneNumber = phoneNumber.getText().toString();
 
                     clastname = lastname.getText().toString();
                     totalamt = etotalamt.getText().toString();
@@ -111,7 +114,7 @@ public class AddCustomer extends AppCompatActivity {
                     Fire_name_key = name_key.toLowerCase();
 
                     try {
-                        member = new Member(cname,clastname, startsub.getText().toString(), endsub.getText().toString(), totalamt, packagetype, mac_id, typeofpay, storePaidoptn,name_key);
+                        member = new Member(cname,clastname, startsub.getText().toString(), endsub.getText().toString(), totalamt, packagetype, mac_id, typeofpay, storePaidoptn,name_key, PhoneNumber);
                     }
                     catch (Exception e) {}
 

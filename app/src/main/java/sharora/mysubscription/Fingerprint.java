@@ -8,11 +8,17 @@ import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import androidx.biometric.BiometricPrompt;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.concurrent.Executor;
@@ -23,14 +29,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Fingerprint extends AppCompatActivity {
-
+    public static final int STARTUP_DELAY = 300;
+    public static final int ANIM_ITEM_DURATION = 1000;
+    public static final int ITEM_DELAY = 300;
+    private boolean animationStarted = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fingerprint);
         final Executor executor = Executors.newSingleThreadExecutor();
         final FragmentActivity activity = this;
-
         final BiometricPrompt biometricPrompt = new BiometricPrompt(activity, executor, new BiometricPrompt.AuthenticationCallback() {
             @Override
             public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
@@ -70,7 +81,7 @@ public class Fingerprint extends AppCompatActivity {
                 .setNegativeButtonText("Cancel")
                 .build();
 
-        findViewById(R.id.authenticateButton).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.authenticatebutton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 biometricPrompt.authenticate(promptInfo);
@@ -78,6 +89,40 @@ public class Fingerprint extends AppCompatActivity {
         });
 
     }
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+
+        if (!hasFocus || animationStarted) {
+            return;
+        }
+
+        animate();
+
+        super.onWindowFocusChanged(hasFocus);
+    }
+    private void animate() {
+        ViewGroup container = (ViewGroup) findViewById(R.id.container);
+
+        for (int i = 0; i < container.getChildCount(); i++) {
+            View v = container.getChildAt(i);
+            ViewPropertyAnimatorCompat viewAnimator;
+
+            if (!(v instanceof Button)) {
+                viewAnimator = ViewCompat.animate(v)
+                        .translationY(50).alpha(1)
+                        .setStartDelay((ITEM_DELAY * i) + 500)
+                        .setDuration(1000);
+            } else {
+                viewAnimator = ViewCompat.animate(v)
+                        .scaleY(1).scaleX(1)
+                        .setStartDelay((ITEM_DELAY * i) + 500)
+                        .setDuration(1000);
+            }
+
+            viewAnimator.setInterpolator(new DecelerateInterpolator()).start();
+        }
+    }
+
 
     public void gotomain(){
         Intent intent = new Intent(this, MainActivity.class);
