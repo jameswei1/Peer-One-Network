@@ -27,6 +27,7 @@ public class AddPackage extends AppCompatActivity {
         EditText pkg = findViewById(R.id.pkgName);
         final String pkgStr = pkg.getText().toString();
 
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

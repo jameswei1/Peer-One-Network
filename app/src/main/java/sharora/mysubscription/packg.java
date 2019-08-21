@@ -1,6 +1,6 @@
 package sharora.mysubscription;
 
-public class pkg {
+public class packg {
 
     String name;
 
@@ -8,7 +8,7 @@ public class pkg {
         return name;
     }
 
-    public pkg() {
-
+    public packg(String name) {
+        this.name = name;
     }
 }
