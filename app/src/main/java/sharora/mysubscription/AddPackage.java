@@ -30,7 +30,7 @@ public class AddPackage extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                reff.child(pkgStr).setValue();
+                //reff.child(pkgStr).setValue();
                 Toast.makeText(AddPackage.this, "Package added successfully", Toast.LENGTH_SHORT).show();
                 goToMain();
             }
