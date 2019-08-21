@@ -68,10 +68,10 @@ public class AlarmReceiver extends BroadcastReceiver {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists() ){
                     for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    //
-                        //    SmsManager smsManager = SmsManager.getDefault();
-                   //     smsManager.sendTextMessage("6478305885",null, "Expires in 5 days: "+ds.getValue(Member.class).Getname()+" "+ds.getValue(Member.class).Getlastname(), null, null);
-                     //   smsManager.sendTextMessage(ds.getValue(Member.class).getPhoneNumber(), null, "Your subscription expires in 5 days", null, null);
+
+                        SmsManager smsManager = SmsManager.getDefault();
+                        smsManager.sendTextMessage("6478305885",null, "Expires in 5 days: "+ds.getValue(Member.class).Getname()+" "+ds.getValue(Member.class).Getlastname(), null, null);
+                        smsManager.sendTextMessage(ds.getValue(Member.class).getPhoneNumber(), null, "Your subscription expires in 5 days", null, null);
                     }
                 }
             }
@@ -88,9 +88,9 @@ public class AlarmReceiver extends BroadcastReceiver {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists() ){
                     for(DataSnapshot ds: dataSnapshot.getChildren()){
-                 //       SmsManager smsManager = SmsManager.getDefault();
-                   //     smsManager.sendTextMessage("6478305885",null, "Expires tomorrow: "+ds.getValue(Member.class).Getname()+" "+ds.getValue(Member.class).Getlastname(), null, null);
-                     //   smsManager.sendTextMessage(ds.getValue(Member.class).getPhoneNumber(), null, "Your subscription expires tomorrow", null, null);
+                        SmsManager smsManager = SmsManager.getDefault();
+                        smsManager.sendTextMessage("6478305885",null, "Expires tomorrow: "+ds.getValue(Member.class).Getname()+" "+ds.getValue(Member.class).Getlastname(), null, null);
+                        smsManager.sendTextMessage(ds.getValue(Member.class).getPhoneNumber(), null, "Your subscription expires tomorrow", null, null);
                     }
                 }
             }

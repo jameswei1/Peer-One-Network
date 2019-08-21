@@ -2,6 +2,7 @@ package sharora.mysubscription;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RadioButton;
@@ -98,6 +99,8 @@ public class EditCustomer extends AppCompatActivity {
                     final String MACID = MACIDField.getText().toString();
                     final String pNumber = pNum.getText().toString();
                     updateValue(fName, lName, startSub, endSub, totalAmount, pkgType, MACID, pNumber);
+                    Toast.makeText(EditCustomer.this, "Update Successful", Toast.LENGTH_SHORT).show();
+                    goToMain();
                 }
             }
         });
@@ -130,5 +133,10 @@ public class EditCustomer extends AppCompatActivity {
 
         Member member = new Member(fName, lName, startSub, endSub, totalamt, pkgtype, macid, PaymentMethod, HowMuchPaid, id, Phone);
         databaseReference.setValue(member);
+    }
+
+    private void goToMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
