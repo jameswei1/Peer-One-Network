@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -95,6 +94,9 @@ public class AddCustomer extends AppCompatActivity {
                 else if (date1 == null || date2 == null) {
                     Toast.makeText(AddCustomer.this, "Improper date format", Toast.LENGTH_SHORT).show();
                 }
+                else if (!(phoneNumber.getText().toString().matches("\\d+")) || phoneNumber.getText().toString().length() != 10) {
+                    Toast.makeText(AddCustomer.this, "Improper phone number format", Toast.LENGTH_SHORT).show();
+                }
 
                 else {
                     int paidid = paid.getCheckedRadioButtonId();
@@ -103,13 +105,14 @@ public class AddCustomer extends AppCompatActivity {
                     int mopayid = modeofpay.getCheckedRadioButtonId();
                     payoption = findViewById(mopayid);
                     typeofpay = payoption.getText().toString();
+
                     cname = name.getText().toString();
                     PhoneNumber = phoneNumber.getText().toString();
-
                     clastname = lastname.getText().toString();
                     totalamt = etotalamt.getText().toString();
-                    mac_id= macid.getText().toString();
+                    mac_id = macid.getText().toString();
                     packagetype = packageT.getText().toString();
+
                     name_key = cname+clastname;
                     Fire_name_key = name_key.toLowerCase();
 
@@ -120,8 +123,6 @@ public class AddCustomer extends AppCompatActivity {
                         goToMain();
                     }
                     catch (Exception e) {}
-
-
                 }
             }
         });

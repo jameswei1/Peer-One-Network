@@ -62,8 +62,8 @@ public class RunForever extends Service {
         calendar.set(calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH),
-                10,
-                16,
+                11,
+                19,
                 0);
         setAlarm(calendar.getTimeInMillis());
         Log.d("ran", "runs forever");
@@ -75,7 +75,6 @@ public class RunForever extends Service {
         Intent intent = new Intent(this, AlarmReceiver.class);
         PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMillis, broadcast);
-
     }
     public boolean checkPermission(String Permission) {
         int check = ContextCompat.checkSelfPermission(this, Permission);

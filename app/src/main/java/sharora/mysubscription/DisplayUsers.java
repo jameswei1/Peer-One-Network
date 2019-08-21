@@ -76,6 +76,7 @@ public class DisplayUsers extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 deleteValue();
+                Toast.makeText(DisplayUsers.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
             }
         });
     }

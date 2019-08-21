@@ -40,11 +40,6 @@ import java.util.Date;
 
 public class AlarmReceiver extends BroadcastReceiver {
     public static final String CHANNEL1_ID = "channel1";
-    private NotificationManagerCompat notificationManager;
-
-    int request = 1;
-    private FirebaseDatabase base;
-    private DatabaseReference ref;
 
     Date date1, date2;
 
@@ -68,7 +63,6 @@ public class AlarmReceiver extends BroadcastReceiver {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists() ){
                     for(DataSnapshot ds: dataSnapshot.getChildren()){
-
                         SmsManager smsManager = SmsManager.getDefault();
                         smsManager.sendTextMessage("6478305885",null, "Expires in 5 days: "+ds.getValue(Member.class).Getname()+" "+ds.getValue(Member.class).Getlastname(), null, null);
                         smsManager.sendTextMessage(ds.getValue(Member.class).getPhoneNumber(), null, "Your subscription expires in 5 days", null, null);

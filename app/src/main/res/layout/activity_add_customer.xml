@@ -123,15 +123,15 @@
             android:layout_width="200dp"
             android:layout_height="30dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="273dp"
-            android:layout_marginEnd="95dp"
+            android:layout_marginTop="276dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/edittextstyle"
             android:ems="10"
             android:fontFamily="@font/advent_pro_medium"
             android:inputType="textPersonName"
             android:textColor="#F5F5F5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.89"
+            app:layout_constraintHorizontal_bias="0.705"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ename" />
 
@@ -154,17 +154,16 @@
 
         <RadioGroup
             android:id="@+id/gpaid"
-            android:layout_width="409dp"
-            android:layout_height="37dp"
+            android:layout_width="342dp"
+            android:layout_height="48dp"
 
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="60dp"
             android:fontFamily="@font/advent_pro_light"
             android:orientation="horizontal"
             android:textColor="#F5F5F5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.212"
+            app:layout_constraintHorizontal_bias="0.428"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vtotamt">
 
@@ -172,9 +171,9 @@
                 android:id="@+id/tpaid"
                 android:layout_width="190dp"
                 android:layout_height="wrap_content"
+                android:buttonTint="@color/cyan"
                 android:fontFamily="@font/advent_pro_medium"
                 android:text="Totally Paid"
-                android:buttonTint="@color/cyan"
                 android:textColor="#F5F5F5" />
 
             <RadioButton
@@ -182,9 +181,9 @@
                 android:layout_width="227dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:buttonTint="@color/cyan"
                 android:fontFamily="@font/advent_pro_medium"
                 android:text="Partially Paid"
-                android:buttonTint="@color/cyan"
                 android:textColor="#F5F5F5" />
         </RadioGroup>
 
@@ -205,19 +204,16 @@
 
         <RadioGroup
             android:id="@+id/gmopay"
-            android:layout_width="423dp"
-            android:layout_height="79dp"
+            android:layout_width="326dp"
+            android:layout_height="81dp"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="56dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+
             android:fontFamily="@font/advent_pro_light"
             android:orientation="vertical"
-
             android:textColor="#F5F5F5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.035"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gpaid">
 
@@ -226,9 +222,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:buttonTint="@color/cyan"
                 android:fontFamily="@font/advent_pro_medium"
                 android:text="Visa"
-                android:buttonTint="@color/cyan"
                 android:textColor="#F5F5F5" />
 
             <RadioButton
@@ -236,9 +232,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:buttonTint="@color/cyan"
                 android:fontFamily="@font/advent_pro_medium"
                 android:text="Debit"
-                android:buttonTint="@color/cyan"
                 android:textColor="#F5F5F5" />
 
             <RadioButton
@@ -246,9 +242,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:buttonTint="@color/cyan"
                 android:fontFamily="@font/advent_pro_medium"
                 android:text="Cash"
-                android:buttonTint="@color/cyan"
                 android:textColor="#F5F5F5" />
         </RadioGroup>
 
@@ -283,17 +279,17 @@
 
         <Button
             android:id="@+id/send"
-            android:layout_width="94dp"
-            android:layout_height="50dp"
+            android:layout_width="78dp"
+            android:layout_height="33dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="664dp"
+            android:layout_marginTop="692dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/roundbutton"
             android:fontFamily="@font/advent_pro_light"
             android:text="save"
             android:textColor="#F5F5F5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.994"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -399,21 +395,21 @@
             android:layout_height="30dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="75dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/edittextstyle"
             android:ems="10"
             android:fontFamily="@font/advent_pro_medium"
             android:hint="No dashes or spaces"
-            android:inputType="textPersonName"
+            android:inputType="phone"
             android:textColor="#F5F5F5"
             android:textColorHint="#A9AEAF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.851"
+            app:layout_constraintHorizontal_bias="0.71"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.366"
+            app:layout_constraintVertical_bias="0.376"
             tools:text="@tools:sample/us_phones" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
