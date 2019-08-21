@@ -15,7 +15,7 @@
         android:layout_width="362dp"
         android:layout_height="65dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="268dp"
+        android:layout_marginTop="156dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/edittextstyle"
         android:ems="10"
@@ -25,6 +25,26 @@
         android:textColor="#F5F5F5"
         android:textColorHint="#A9AEAF"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.557"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/pkgPrice"
+        android:layout_width="362dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="256dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/edittextstyle"
+        android:ems="10"
+        android:fontFamily="@font/advent_pro_medium"
+        android:hint="Enter price of package"
+        android:inputType="numberDecimal"
+        android:textColor="#F5F5F5"
+        android:textColorHint="#A9AEAF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,5 +64,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_send" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,14 +24,16 @@ public class AddPackage extends AppCompatActivity {
         reff = FirebaseDatabase.getInstance().getReference("packages");
 
         Button addButton = findViewById(R.id.addButton);
-        EditText pkg = findViewById(R.id.pkgName);
-        final String pkgStr = pkg.getText().toString();
-
+        final EditText pkg = findViewById(R.id.pkgName);
+        final EditText price = findViewById(R.id.pkgPrice);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //reff.child(pkgStr).setValue();
+                String pkgStr = pkg.getText().toString();
+                double priceDouble = Double.valueOf(price.getText().toString());
+                Packg pkge = new Packg(pkgStr, priceDouble);
+                reff.child(pkgStr).setValue(pkge);
                 Toast.makeText(AddPackage.this, "Package added successfully", Toast.LENGTH_SHORT).show();
                 goToMain();
             }

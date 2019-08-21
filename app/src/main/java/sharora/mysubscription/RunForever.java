@@ -23,7 +23,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import static sharora.mysubscription.notifications.CHANNEL_1_ID;
+import static sharora.mysubscription.App.CHANNEL_1_ID;
 
 public class RunForever extends Service {
 
