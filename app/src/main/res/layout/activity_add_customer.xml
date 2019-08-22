@@ -260,23 +260,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gmopay" />
 
-        <EditText
-            android:id="@+id/evpack"
-            android:layout_width="200dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginEnd="95dp"
-            android:background="@drawable/edittextstyle"
-            android:ems="10"
-            android:fontFamily="@font/advent_pro_light"
-            android:inputType="textPersonName"
-            android:textColor="#F5F5F5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.259"
-            app:layout_constraintStart_toEndOf="@+id/vpack"
-            app:layout_constraintTop_toBottomOf="@+id/gmopay" />
-
         <Button
             android:id="@+id/send"
             android:layout_width="78dp"
@@ -311,7 +294,6 @@
             android:layout_height="30dp"
             android:layout_marginStart="24dp"
 
-            android:layout_marginTop="23dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/edittextstyle"
             android:ems="10"
@@ -321,7 +303,7 @@
             app:layout_constraintEnd_toStartOf="@+id/send"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/macid"
-            app:layout_constraintTop_toBottomOf="@+id/evpack" />
+            tools:layout_editor_absoluteY="698dp" />
 
         <TextView
             android:id="@+id/textView"
@@ -411,6 +393,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.376"
             tools:text="@tools:sample/us_phones" />
+
+        <Spinner
+            android:id="@+id/evpack"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="645dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

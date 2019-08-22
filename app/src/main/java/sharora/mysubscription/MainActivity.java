@@ -58,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
                 goToAddPkg();
             }
         });
+        viewDelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToViewAllPkg();
+            }
+        });
     }
 
     //Sends to next Activity
@@ -87,6 +93,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToAddPkg() {
         Intent intent = new Intent(this, AddPackage.class);
+        startActivity(intent);
+    }
+    public void goToViewAllPkg() {
+        Intent intent = new Intent(this, View_All_Packages.class);
         startActivity(intent);
     }
 }

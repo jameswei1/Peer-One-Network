@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="5dp"
+    android:background="@drawable/cards"
     android:gravity="center_horizontal">
 
 <androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
+    android:layout_width="500dp"
     android:layout_height="wrap_content"
     cardview:cardElevation="4dp"
     android:layout_gravity="center_horizontal"

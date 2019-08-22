@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 public class AddPackage extends AppCompatActivity {
 
     @Override
@@ -31,7 +33,7 @@ public class AddPackage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String pkgStr = pkg.getText().toString();
-                double priceDouble = Double.valueOf(price.getText().toString());
+                String priceDouble = price.getText().toString();
                 Packg pkge = new Packg(pkgStr, priceDouble);
                 reff.child(pkgStr).setValue(pkge);
                 Toast.makeText(AddPackage.this, "Package added successfully", Toast.LENGTH_SHORT).show();
@@ -39,6 +41,7 @@ public class AddPackage extends AppCompatActivity {
             }
         });
     }
+
 
     public void goToMain() {
         Intent intent = new Intent(this, MainActivity.class);

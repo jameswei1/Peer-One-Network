@@ -10,12 +10,18 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class AddCustomer extends AppCompatActivity {
@@ -52,7 +58,7 @@ public class AddCustomer extends AppCompatActivity {
     String Fire_name_key;
     String PhoneNumber;
     FirebaseDatabase mFirebaseDatabase;
-    DatabaseReference reff;
+    DatabaseReference reff,packagereff;
     Member member;
 
     @Override
@@ -74,6 +80,7 @@ public class AddCustomer extends AppCompatActivity {
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         reff = mFirebaseDatabase.getReference("customers");
+        packagereff = mFirebaseDatabase.getReference("packages");
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +135,46 @@ public class AddCustomer extends AppCompatActivity {
         });
     }
 
+    public ArrayList<String> retrieve(){
+        final ArrayList<String> packages = new ArrayList<>();
+        packagereff.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                fetchdata(dataSnapshot,packages);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                fetchdata(dataSnapshot,packages);
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return packages;
+    }
+
+    private void fetchdata(DataSnapshot dataSnapshot,ArrayList<String> Packages){
+        Packages.clear();
+        for(DataSnapshot ds : dataSnapshot.getChildren()){
+            String packages = ds.getValue(Packg.class).getName();
+            Packages.add(packages);
+
+        }
+    }
     private void goToMain() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

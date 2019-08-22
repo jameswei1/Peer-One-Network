@@ -3,13 +3,22 @@ package sharora.mysubscription;
 public class Packg {
 
     String name;
-    double price;
+    String price;
+
+  public Packg(){
+
+  }
+
+    public Packg(String name, String price) {
+        this.name = name;
+        this.price = price;
+    }
 
     public String getName() {
         return name;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
@@ -17,12 +26,7 @@ public class Packg {
         this.name = name;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public Packg(String name, double price) {
-        this.name = name;
+    public void setPrice(String price) {
         this.price = price;
     }
 }
