@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.hardware.fingerprint.FingerprintManagerCompat;
 
+import android.content.Context;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.view.ViewCompat;
@@ -29,8 +31,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Fingerprint extends AppCompatActivity {
-    public static final int STARTUP_DELAY = 300;
-    public static final int ANIM_ITEM_DURATION = 1000;
     public static final int ITEM_DELAY = 300;
     private boolean animationStarted = false;
     @Override
@@ -58,14 +58,20 @@ public class Fingerprint extends AppCompatActivity {
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 //TODO: Called when a biometric is recognized.
-//                LocalDate myObj = LocalDate.now();
-//                Log.d("date", myObj.toString());
 
                 if (executor == null) {
                     throw new IllegalArgumentException("Executor must not be null");
                 }
-
-                gotomain();
+                else if (!isNetworkConnected()) {
+                    activity.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(activity, "Check internet connection", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+                else {
+                    gotomain();
+                }
             }
 
             @Override
@@ -127,5 +133,11 @@ public class Fingerprint extends AppCompatActivity {
     public void gotomain(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 }

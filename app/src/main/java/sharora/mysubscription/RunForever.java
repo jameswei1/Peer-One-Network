@@ -62,8 +62,8 @@ public class RunForever extends Service {
         calendar.set(calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH),
-                11,
-                19,
+                12,
+                20,
                 0);
         setAlarm(calendar.getTimeInMillis());
         Log.d("ran", "runs forever");

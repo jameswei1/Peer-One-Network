@@ -1,34 +1,17 @@
 package sharora.mysubscription;
 
-import android.Manifest;
-import android.app.Application;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
+
 import android.telephony.SmsManager;
-import android.util.Log;
-import android.view.View;
+
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
-
-import static androidx.core.content.ContextCompat.createDeviceProtectedStorageContext;
-import static androidx.core.content.ContextCompat.getSystemService;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -63,9 +46,9 @@ public class AlarmReceiver extends BroadcastReceiver {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists() ){
                     for(DataSnapshot ds: dataSnapshot.getChildren()){
-//                        SmsManager smsManager = SmsManager.getDefault();
-//                        smsManager.sendTextMessage("6478305885",null, "Expires in 5 days: "+ds.getValue(Member.class).Getname()+" "+ds.getValue(Member.class).Getlastname(), null, null);
-//                        smsManager.sendTextMessage(ds.getValue(Member.class).getPhoneNumber(), null, "Your subscription expires in 5 days", null, null);
+                        SmsManager smsManager = SmsManager.getDefault();
+                        smsManager.sendTextMessage("6478305885",null, "Expires in 5 days: "+ds.getValue(Member.class).Getname()+" "+ds.getValue(Member.class).Getlastname(), null, null);
+                        smsManager.sendTextMessage(ds.getValue(Member.class).getPhoneNumber(), null, "Your subscription expires in 5 days", null, null);
                     }
                 }
             }
@@ -82,9 +65,9 @@ public class AlarmReceiver extends BroadcastReceiver {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists() ){
                     for(DataSnapshot ds: dataSnapshot.getChildren()){
-//                        SmsManager smsManager = SmsManager.getDefault();
-//                        smsManager.sendTextMessage("6478305885",null, "Expires tomorrow: "+ds.getValue(Member.class).Getname()+" "+ds.getValue(Member.class).Getlastname(), null, null);
-//                        smsManager.sendTextMessage(ds.getValue(Member.class).getPhoneNumber(), null, "Your subscription expires tomorrow", null, null);
+                        SmsManager smsManager = SmsManager.getDefault();
+                        smsManager.sendTextMessage("6478305885",null, "Expires tomorrow: "+ds.getValue(Member.class).Getname()+" "+ds.getValue(Member.class).Getlastname(), null, null);
+                        smsManager.sendTextMessage(ds.getValue(Member.class).getPhoneNumber(), null, "Your subscription expires tomorrow", null, null);
                     }
                 }
             }
