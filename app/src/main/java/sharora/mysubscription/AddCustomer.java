@@ -2,11 +2,15 @@ package sharora.mysubscription;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +19,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,13 +36,9 @@ public class AddCustomer extends AppCompatActivity {
     EditText startsub;
     EditText endsub;
     EditText lastname;
-    TextView remmo ;
-    TextView remda ;
-    EditText etotalamt ;
-    EditText packageT ;
+    EditText etotalamt;
     EditText macid ;
     EditText phoneNumber;
-
 
     RadioGroup paid ;
     RadioButton paidchoice ;
@@ -46,6 +48,9 @@ public class AddCustomer extends AppCompatActivity {
     RadioButton payoption;
 
     Date date1, date2;
+
+    Spinner packageT;
+    ArrayList<String> Packages;
 
     String cname ;
     String clastname;
@@ -82,6 +87,55 @@ public class AddCustomer extends AppCompatActivity {
         reff = mFirebaseDatabase.getReference("customers");
         packagereff = mFirebaseDatabase.getReference("packages");
 
+        Packages = new ArrayList<>();
+        Query query = FirebaseDatabase.getInstance().getReference("packages").orderByChild("name");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Packg packages = ds.getValue(Packg.class);
+                    Packages.add(packages.getName());
+                }
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(AddCustomer.this, R.layout.customer_spinner, Packages);
+                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                packageT.setAdapter(arrayAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        packageT.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                final String clickedItem = (String) adapterView.getItemAtPosition(i);
+                Query query2 = FirebaseDatabase.getInstance().getReference("packages").orderByChild("name").equalTo(clickedItem);
+                query2.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.hasChild(clickedItem)) {
+                            for(DataSnapshot ds: dataSnapshot.getChildren()) {
+                                etotalamt.setText(ds.getValue(Packg.class).getPrice());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                etotalamt.setText("Select a package");
+            }
+        });
+
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +147,7 @@ public class AddCustomer extends AppCompatActivity {
 
                 if (name.getText().toString().matches("") || lastname.getText().toString().matches("") ||
                         startsub.getText().toString().matches("") || endsub.getText().toString().matches("") ||
-                        etotalamt.getText().toString().matches("") || packageT.getText().toString().matches("") ||
+                        etotalamt.getText().toString().matches("") ||
                         macid.getText().toString().matches("") || phoneNumber.getText().toString().matches("")) {
                     Toast.makeText(AddCustomer.this, "Field missing", Toast.LENGTH_SHORT).show();
                 }
@@ -104,7 +158,6 @@ public class AddCustomer extends AppCompatActivity {
                 else if (!(phoneNumber.getText().toString().matches("\\d+")) || phoneNumber.getText().toString().length() != 10) {
                     Toast.makeText(AddCustomer.this, "Improper phone number format", Toast.LENGTH_SHORT).show();
                 }
-
                 else {
                     int paidid = paid.getCheckedRadioButtonId();
                     paidchoice = findViewById(paidid);
@@ -118,7 +171,6 @@ public class AddCustomer extends AppCompatActivity {
                     clastname = lastname.getText().toString();
                     totalamt = etotalamt.getText().toString();
                     mac_id = macid.getText().toString();
-                    packagetype = packageT.getText().toString();
 
                     name_key = cname+clastname;
                     Fire_name_key = name_key.toLowerCase();
@@ -135,46 +187,6 @@ public class AddCustomer extends AppCompatActivity {
         });
     }
 
-    public ArrayList<String> retrieve(){
-        final ArrayList<String> packages = new ArrayList<>();
-        packagereff.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                fetchdata(dataSnapshot,packages);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                fetchdata(dataSnapshot,packages);
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        return packages;
-    }
-
-    private void fetchdata(DataSnapshot dataSnapshot,ArrayList<String> Packages){
-        Packages.clear();
-        for(DataSnapshot ds : dataSnapshot.getChildren()){
-            String packages = ds.getValue(Packg.class).getName();
-            Packages.add(packages);
-
-        }
-    }
     private void goToMain() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

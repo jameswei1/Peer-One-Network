@@ -29,15 +29,6 @@ public class DisplayUsers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_users);
 
-
-        //recycler_customer_name = getIntent().getStringExtra("names");
-        //if(recycler_customer_name == null){
-        //  customer_name=getIntent().getStringExtra("NAME ID");
-        //}
-        //else{
-
-        //}
-
         custname = findViewById(R.id.namedet);
         custstartsub = findViewById(R.id.startsubdet);
         custendsub = findViewById(R.id.endsubdet);
@@ -61,7 +52,7 @@ public class DisplayUsers extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(DisplayUsers.this, "cancelled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DisplayUsers.this, "Error", Toast.LENGTH_SHORT).show();
             }
         });
 

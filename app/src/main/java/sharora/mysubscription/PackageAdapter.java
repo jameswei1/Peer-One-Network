@@ -39,7 +39,16 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.myViewHo
         holder.Pakname.setText(packages.get(position).getName());
         holder.Pakprice.setText(packages.get(position).getPrice());
 
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Intent intent = new Intent(context, DisplayPackages.class);
+                intent.putExtra("NAME ID", holder.Pakname.getText().toString().replaceAll("\\s+", "").toLowerCase());
+                context.startActivity(intent);
+
+            }
+        });
     }
 
     @Override
@@ -49,10 +58,12 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.myViewHo
 
     class myViewHolder extends RecyclerView.ViewHolder{
         TextView Pakname,Pakprice;
+        CardView cardView;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
-            Pakname =(TextView)itemView.findViewById(R.id.pname);
-            Pakprice=itemView.findViewById(R.id.pprice);
+            Pakname = itemView.findViewById(R.id.pname);
+            Pakprice = itemView.findViewById(R.id.pprice);
+            cardView = itemView.findViewById(R.id.packagecardview);
         }
     }
 

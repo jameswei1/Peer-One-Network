@@ -37,9 +37,6 @@ public class View_All_Customers extends AppCompatActivity {
         recyclerView = (RecyclerView)findViewById(R.id.recyler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-      /*  DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
-        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(View_All_Customers.this, R.drawable.divider));
-        recyclerView.addItemDecoration(dividerItemDecoration);*/
         customers = new ArrayList<Member>();
 
         reference = FirebaseDatabase.getInstance().getReference("customers");

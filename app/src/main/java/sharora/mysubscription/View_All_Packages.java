@@ -53,8 +53,6 @@ public class View_All_Packages extends AppCompatActivity {
                 Toast.makeText(View_All_Packages.this, "Sorry.. We are facing a problem.", Toast.LENGTH_SHORT).show();
 
             }
-
-
         });
     }
 }
