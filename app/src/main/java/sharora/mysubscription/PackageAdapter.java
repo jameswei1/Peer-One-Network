@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,16 +36,17 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.myViewHo
 
     @Override
     public void onBindViewHolder(@NonNull final myViewHolder holder, int position) {
-
-        holder.Pakname.setText(packages.get(position).getName());
-        holder.Pakprice.setText(packages.get(position).getPrice());
+        String PackagetobeCap =packages.get(position).getName();
+        String PackageAfterCap = PackagetobeCap.substring(0,1).toUpperCase()+PackagetobeCap.substring(1).toLowerCase();
+        holder.Pakname.setText(PackageAfterCap);
+        holder.Pakprice.setText("$"+packages.get(position).getPrice());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent intent = new Intent(context, DisplayPackages.class);
-                intent.putExtra("NAME ID", holder.Pakname.getText().toString().replaceAll("\\s+", "").toLowerCase());
+                intent.putExtra("NAME_PKG", holder.Pakname.getText().toString().toLowerCase());
                 context.startActivity(intent);
 
             }
@@ -58,7 +60,7 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.myViewHo
 
     class myViewHolder extends RecyclerView.ViewHolder{
         TextView Pakname,Pakprice;
-        CardView cardView;
+        LinearLayout cardView;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
             Pakname = itemView.findViewById(R.id.pname);

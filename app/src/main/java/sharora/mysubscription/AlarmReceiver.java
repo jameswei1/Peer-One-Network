@@ -47,7 +47,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 if(dataSnapshot.exists() ){
                     for(DataSnapshot ds: dataSnapshot.getChildren()){
                         SmsManager smsManager = SmsManager.getDefault();
-                        smsManager.sendTextMessage("6477735365",null, "Expires in 5 days: "+ds.getValue(Member.class).Getname()+" "+ds.getValue(Member.class).Getlastname(), null, null);
+                        smsManager.sendTextMessage("+3657774972",null, "Expires in 5 days: "+ds.getValue(Member.class).Getname()+" "+ds.getValue(Member.class).Getlastname(), null, null);
                         smsManager.sendTextMessage(ds.getValue(Member.class).getPhoneNumber(), null, "Your subscription expires in 5 days", null, null);
                     }
                 }
@@ -66,7 +66,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 if(dataSnapshot.exists() ){
                     for(DataSnapshot ds: dataSnapshot.getChildren()){
                         SmsManager smsManager = SmsManager.getDefault();
-                        smsManager.sendTextMessage("6477735365",null, "Expires tomorrow: "+ds.getValue(Member.class).Getname()+" "+ds.getValue(Member.class).Getlastname(), null, null);
+                        smsManager.sendTextMessage("+3657774972",null, "Expires tomorrow: "+ds.getValue(Member.class).Getname()+" "+ds.getValue(Member.class).Getlastname(), null, null);
                         smsManager.sendTextMessage(ds.getValue(Member.class).getPhoneNumber(), null, "Your subscription expires tomorrow", null, null);
                     }
                 }

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +28,7 @@ public class DisplayUsers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_users);
 
-        custname = findViewById(R.id.namedet);
+        custname = findViewById(R.id.nameview);
         custstartsub = findViewById(R.id.startsubdet);
         custendsub = findViewById(R.id.endsubdet);
         custtotalamt = findViewById(R.id.totalamountdet);
@@ -75,7 +74,14 @@ public class DisplayUsers extends AppCompatActivity {
         customer_name = getIntent().getStringExtra("NAME ID");
         for(DataSnapshot ds : dataSnapshot.getChildren()) {
             if (ds.hasChild(customer_name)) {
-                custname.setText(ds.child(customer_name).getValue(Member.class).Getname() + " " + ds.child(customer_name).getValue(Member.class).Getlastname());
+
+                String Fnametobecap =ds.child(customer_name).getValue(Member.class).Getname();
+                String Fnameaftercap = Fnametobecap.substring(0,1).toUpperCase()+Fnametobecap.substring(1).toLowerCase();
+
+                String Lnametobecap =ds.child(customer_name).getValue(Member.class).Getlastname();
+                String Lnameaftercap = Lnametobecap.substring(0,1).toUpperCase()+Lnametobecap.substring(1).toLowerCase();
+
+                custname.setText( Fnameaftercap+ " " + Lnameaftercap);
                 custstartsub.setText(ds.child(customer_name).getValue(Member.class).GetStartsub());
                 custendsub.setText(ds.child(customer_name).getValue(Member.class).GetEndsub());
                 custtotalamt.setText(ds.child(customer_name).getValue(Member.class).GetTotalamt());
@@ -111,7 +117,7 @@ public class DisplayUsers extends AppCompatActivity {
         String id = fName + lName;
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("customers").child(id.toLowerCase());
         databaseReference.removeValue();
-        Intent intent = new Intent(this, Enter_Firstname_Lastname.class);
+        Intent intent = new Intent(this, View_All_Customers.class);
         startActivity(intent);
     }
 }

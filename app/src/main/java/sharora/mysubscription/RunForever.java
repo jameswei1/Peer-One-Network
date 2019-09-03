@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 
 import static sharora.mysubscription.App.CHANNEL_1_ID;
 
-public class RunForever extends Service {
+public class  RunForever extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -62,8 +62,8 @@ public class RunForever extends Service {
         calendar.set(calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH),
-                12,
-                20,
+                22,
+                31,
                 0);
         setAlarm(calendar.getTimeInMillis());
         Log.d("ran", "runs forever");

@@ -5,4 +5,9 @@
     <color name="colorAccent">#D81B60</color>
     <color name="semiTransparentCyan">#80034B57</color>
     <color name="cyan">#23B4D2</color>
+    <color name="white">#FAFBFC</color>
+    <color name="dark_blue">#07282C</color>
+
+
+
 </resources>

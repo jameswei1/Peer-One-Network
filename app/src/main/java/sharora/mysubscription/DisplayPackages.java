@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class DisplayPackages extends AppCompatActivity {
+public class   DisplayPackages extends AppCompatActivity {
 
     TextView name, price;
     String pkgName;
@@ -30,8 +29,8 @@ public class DisplayPackages extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_packages);
 
-        name = findViewById(R.id.namedet);
-        price = findViewById(R.id.price);
+        name = findViewById(R.id.nameview);
+        price = findViewById(R.id.priceview);
         delete = findViewById(R.id.deleteButton);
 
         myref = FirebaseDatabase.getInstance();
@@ -59,11 +58,13 @@ public class DisplayPackages extends AppCompatActivity {
     }
 
     public void showValues(DataSnapshot dataSnapshot) {
-        pkgName = getIntent().getStringExtra("NAME ID");
+        pkgName = getIntent().getStringExtra("NAME_PKG");
         for(DataSnapshot ds : dataSnapshot.getChildren()) {
             if (ds.hasChild(pkgName)) {
-                name.setText(ds.child(pkgName).getValue(Packg.class).getName());
-                price.setText(ds.child(pkgName).getValue(Packg.class).getPrice());
+                String NameToBeCap =ds.child(pkgName).getValue(Packg.class).getName();
+                String NameAfterCap =NameToBeCap.substring(0,1).toUpperCase()+NameToBeCap.substring(1).toLowerCase();
+                name.setText(NameAfterCap);
+                price.setText("$"+ds.child(pkgName).getValue(Packg.class).getPrice());
             }
         }
     }

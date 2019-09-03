@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_new"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical"
+    tools:context=".DisplayPackages">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash_screen_o"
+        android:foreground="#90000000"
+        android:layout_marginLeft="-10dp"
+        android:layout_marginRight="-10dp"
+        />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".DisplayUsers">
+
+        >
 
         <TextView
             android:id="@+id/name"
@@ -20,13 +30,14 @@
             android:layout_marginEnd="8dp"
             android:text="Name:"
             android:textColor="#F5F5F5"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.163"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/namedet"
+            android:id="@+id/nameview"
             android:layout_width="wrap_content"
             android:layout_height="26dp"
             android:layout_marginStart="8dp"
@@ -34,19 +45,20 @@
             android:layout_marginEnd="8dp"
             android:text="TextView"
             android:textColor="#F5F5F5"
-
+android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.454"
             app:layout_constraintStart_toEndOf="@+id/name"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/price"
+            android:id="@+id/priceview"
             android:layout_width="wrap_content"
             android:layout_height="26dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="168dp"
             android:layout_marginEnd="8dp"
+            android:textSize="18sp"
             android:text="TextView"
             android:textColor="#F5F5F5"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,12 +67,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/startsub"
+            android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="48dp"
             android:layout_marginEnd="8dp"
+            android:textSize="18sp"
             android:text="Price:"
             android:textColor="#F5F5F5"
 
@@ -70,7 +83,7 @@
             app:layout_constraintTop_toBottomOf="@+id/name" />
 
         <TextView
-            android:id="@+id/customerdet"
+            android:id="@+id/pd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -78,7 +91,7 @@
             android:layout_marginEnd="8dp"
             android:text="Package Details"
             android:textColor="#F5F5F5"
-            android:textSize="18sp"
+            android:textSize="23sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -89,13 +102,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:background="@drawable/roundbutton"
+            android:textColor="#F5F5F5"
             android:layout_marginTop="208dp"
             android:layout_marginEnd="8dp"
             android:text="Delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/customerdet" />
+            app:layout_constraintTop_toTopOf="@+id/pd" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

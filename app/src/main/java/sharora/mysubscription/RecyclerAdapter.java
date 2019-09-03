@@ -2,16 +2,14 @@ package sharora.mysubscription;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.CollapsibleActionView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -35,14 +33,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.myView
 
     @Override
     public void onBindViewHolder(@NonNull final myViewHolder holder, int position) {
+        String FnameBeforeCap =customers.get(position).Getname();
+        String FnameAfterCap = FnameBeforeCap.substring(0,1).toUpperCase()+FnameBeforeCap.substring(1).toLowerCase();
 
-        holder.name.setText(customers.get(position).Getname()+" " + customers.get(position).Getlastname());
+        String LnameBeforeCap =customers.get(position).Getlastname();
+        String LnameAfterCap = LnameBeforeCap.substring(0,1).toUpperCase()+LnameBeforeCap.substring(1).toLowerCase();
+
+        holder.name.setText(FnameAfterCap+" " + LnameAfterCap);
         holder.start_sub.setText(customers.get(position).GetStartsub());
         holder.end_sub.setText(customers.get(position).GetEndsub());
         holder.paymentoptn.setText(customers.get(position).GetPaymentOption());
         holder.pkgtype.setText(customers.get(position).Getpkgtype());
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.cardLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -62,7 +65,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.myView
 
     class myViewHolder extends RecyclerView.ViewHolder{
         TextView name,start_sub,end_sub,paymentoptn,pkgtype;
-        CardView cardView;
+        LinearLayout cardLinearLayout;
         ImageView light;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,7 +75,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.myView
             light =(ImageView) itemView.findViewById(R.id.imageView);
             paymentoptn =(TextView)itemView.findViewById(R.id.rtypeofpay);
             pkgtype =(TextView)itemView.findViewById(R.id.rpkgtype);
-            cardView = (CardView)itemView.findViewById(R.id.cardview);
+            cardLinearLayout = itemView.findViewById(R.id.cardview);
         }
     }
 

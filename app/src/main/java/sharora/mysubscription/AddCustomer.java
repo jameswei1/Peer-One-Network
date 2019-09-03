@@ -1,12 +1,16 @@
 package sharora.mysubscription;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -25,7 +29,10 @@ import com.google.firebase.database.ValueEventListener;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,6 +46,7 @@ public class AddCustomer extends AppCompatActivity {
     EditText etotalamt;
     EditText macid ;
     EditText phoneNumber;
+    ConstraintLayout constraintLayout;
 
     RadioGroup paid ;
     RadioButton paidchoice ;
@@ -46,7 +54,7 @@ public class AddCustomer extends AppCompatActivity {
 
     RadioGroup modeofpay;
     RadioButton payoption;
-
+    CalendarView subscriptiondate;
     Date date1, date2;
 
     Spinner packageT;
@@ -79,6 +87,11 @@ public class AddCustomer extends AppCompatActivity {
         packageT = findViewById(R.id.evpack);
         macid = findViewById(R.id.emacid);
         phoneNumber = findViewById(R.id.number);
+        constraintLayout = findViewById(R.id.contraint);
+
+        subscriptiondate = findViewById(R.id.subcalendar);
+        subscriptiondate.setVisibility(View.INVISIBLE);
+
 
         paid = findViewById(R.id.gpaid);
         modeofpay = findViewById(R.id.gmopay);
@@ -94,7 +107,9 @@ public class AddCustomer extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Packg packages = ds.getValue(Packg.class);
-                    Packages.add(packages.getName());
+                    String BeforeCapPackage = packages.getName();
+                    String AfterCapPackage = BeforeCapPackage.substring(0,1).toUpperCase()+BeforeCapPackage.substring(1).toLowerCase();
+                    Packages.add(AfterCapPackage);
                 }
 
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(AddCustomer.this, R.layout.customer_spinner, Packages);
@@ -136,6 +151,59 @@ public class AddCustomer extends AppCompatActivity {
             }
         });
 
+        startsub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeKey();
+                subscriptiondate.setVisibility(View.VISIBLE);
+
+                subscriptiondate.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+                    @Override
+                    public void onSelectedDayChange(CalendarView calendarView, int year, int month, int day) {
+                        String stdate= day+"/"+(month+1)+"/"+year;
+                        Date startdate = null;
+                        try {
+                            startdate = new SimpleDateFormat("dd/MM/yyyy").parse(stdate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        startsub.setText(dateFormat.format(startdate));
+                    }
+                });
+            }
+        });
+        endsub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeKey();
+                subscriptiondate.setVisibility(View.VISIBLE);
+
+                subscriptiondate.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+                    @Override
+                    public void onSelectedDayChange(CalendarView calendarView, int year, int month, int day) {
+                        String endate= day+"/"+(month+1)+"/"+year;
+                        Date enddate = null;
+                        try {
+                            enddate = new SimpleDateFormat("dd/MM/yyyy").parse(endate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        endsub.setText(dateFormat.format(enddate));
+                    }
+                });
+            }
+        });
+
+
+        constraintLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                subscriptiondate.setVisibility(View.INVISIBLE);
+            }
+        });
+
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,6 +240,8 @@ public class AddCustomer extends AppCompatActivity {
                     totalamt = etotalamt.getText().toString();
                     mac_id = macid.getText().toString();
 
+                    packagetype= packageT.getSelectedItem().toString();
+
                     name_key = cname+clastname;
                     Fire_name_key = name_key.toLowerCase();
 
@@ -186,7 +256,13 @@ public class AddCustomer extends AppCompatActivity {
             }
         });
     }
-
+private void closeKey(){
+        View view = this.getCurrentFocus();
+        if(view!=null){
+            InputMethodManager inputMethodManager=(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
+}
     private void goToMain() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

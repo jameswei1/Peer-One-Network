@@ -32,7 +32,7 @@ public class AddPackage extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String pkgStr = pkg.getText().toString();
+                String pkgStr = pkg.getText().toString().toLowerCase();
                 String priceDouble = price.getText().toString();
                 Packg pkge = new Packg(pkgStr, priceDouble);
                 reff.child(pkgStr).setValue(pkge);

@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -23,12 +26,15 @@ public class View_All_Packages extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<Packg> packages;
     PackageAdapter adapter;
+    Button back;
     CardView cardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view__all__packages);
+
+        back = findViewById(R.id.backbutton);
 
         recyclerView = (RecyclerView) findViewById(R.id.recylerpackage);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -52,6 +58,14 @@ public class View_All_Packages extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(View_All_Packages.this, "Sorry.. We are facing a problem.", Toast.LENGTH_SHORT).show();
 
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(View_All_Packages.this,MainActivity.class);
+                startActivity(intent);
             }
         });
     }

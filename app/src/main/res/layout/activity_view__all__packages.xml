@@ -4,19 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_new"
-    android:layout_marginLeft="-10dp"
-    android:layout_marginRight="-10dp"
-    tools:context=".View_All_Customers">
+    android:orientation="vertical"
+    tools:context=".View_All_Packages">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash_screen_o"
+        android:foreground="#90000000"
+        android:layout_marginLeft="-10dp"
+        android:layout_marginRight="-10dp"
+        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recylerpackage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="670dp"
         android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="16"
         tools:listitem="@layout/recycler_view_item" />
+
+        <Button
+            android:id="@+id/backbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/roundbutton"
+            android:fontFamily="@font/advent_pro_medium"
+            android:text="Back"
+            android:textColor="#F5F5F5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recylerpackage" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
